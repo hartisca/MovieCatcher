@@ -4,10 +4,11 @@ import { MovieShow } from "./components/movies/MovieShow";
 import Details from "./pages/Details";
 import SearchResult from "./pages/SearchResult";
 import PageNotFound from "./pages/PageNotFound";
+import Home from "./pages/Home";
 
 const Rutas = () => (
   <Routes>
-    <Route path="/" element={MovieLists}></Route>
+    <Route path="/" element={<Home />}></Route>
     <Route path="/movies" element={<MovieLists />}></Route>
     <Route path="/movies/:id" element={<MovieShow />} />
     <Route path="/:mediaType/:id" element={<Details />}></Route>

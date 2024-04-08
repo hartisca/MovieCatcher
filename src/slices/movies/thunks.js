@@ -1,4 +1,4 @@
-import { setMovies, startLoadingMovies, finishLoadingMovies, setMovie, setStreamingInfo, setVideo, setUpcoming, setPage } from "./movieSlice";
+import { setMovies, startLoadingMovies, finishLoadingMovies, setMovie, setStreamingInfo, setVideo, setUpcoming, setPage, setTrending } from "./movieSlice";
 
 export const fetchMovies = (searchKey, page, selectedGenre) => async (dispatch) => {
   dispatch(startLoadingMovies());
@@ -75,6 +75,30 @@ export const fetchMovieUpComing = () => async(dispatch) => {
     const data = await response.json();
     dispatch(setUpcoming(data));
     
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    dispatch(finishLoadingMovies());
+  }
+}
+
+export const fetchTrendingData = () => async(dispatch) => {
+  dispatch(startLoadingMovies());
+
+  const url = `http://localhost:8000/trending/all`
+
+  try {
+    
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching trending movies: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    dispatch(setTrending(data));
+        
   } catch (error) {
     console.error(error);
     throw error;

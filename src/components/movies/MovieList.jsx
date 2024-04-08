@@ -15,7 +15,7 @@ export const MovieList = ({ movie }) => {
   const handleMovieClick = () => {
     dispatch(setSearchKey(""));
   };
-
+  
   return (
     <Link
       to={`/movies/${movie.id}`}

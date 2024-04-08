@@ -136,4 +136,29 @@ app.get("/movies/upcoming", async (req, res) => {
   }
 });
 
+app.get("/trending/all", async (req, res) => {
+  try {
+    let queryParams = {
+      api_key: API_KEY,
+    };
+
+    const url = `${API_URL}/trending/all/day?${new URLSearchParams(
+      queryParams
+    ).toString()}`;
+    
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const results = data.results;
+    res.json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.listen(8000, () => console.log(`Server running on port ${PORT}`));

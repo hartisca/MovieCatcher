@@ -5,6 +5,7 @@ export const movieSlice = createSlice({
  initialState: { 
    movies: [],
    upcoming: [],
+   trending: [],
    movie: {
     id: "",
     imdb_id: "",
@@ -55,10 +56,13 @@ export const movieSlice = createSlice({
   },
   setUpcoming: (state, action) => {
     state.upcoming = action.payload;
+  },
+  setTrending: (state, action) => {
+    state.trending = action.payload;
   }
 },
 })
 
-export const { setMovies, startLoadingMovies, finishLoadingMovies, setPage, setSearchKey, setMovie, setStreamingInfo, setVideo, setGenre, setUpcoming } = movieSlice.actions
+export const { setMovies, startLoadingMovies, finishLoadingMovies, setPage, setSearchKey, setMovie, setStreamingInfo, setVideo, setGenre, setUpcoming, setTrending } = movieSlice.actions
 
 export const movieReducer = movieSlice.reducer
