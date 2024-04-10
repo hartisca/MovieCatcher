@@ -13,7 +13,8 @@ const HeroBanner = () => {
   const dispatch = useDispatch();
   const [background, setBackground] = useState("");  
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
-  const [localSearchKey, setLocalSearchKey] = useState('');  
+  const [localSearchKey, setLocalSearchKey] = useState('');
+  const [searchPerformed, setSearchPerformed] = useState(false);
 
   useEffect(() => {
     dispatch(fetchMovieUpComing());
@@ -34,6 +35,7 @@ const HeroBanner = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     dispatch(setSearchKey(localSearchKey));
+    setSearchPerformed(true); 
     if (searchKey === "") {
       const randomPage = Math.floor(Math.random() * 500) + 1;
       dispatch(setPage(randomPage));
@@ -41,10 +43,10 @@ const HeroBanner = () => {
   }; 
 
   useEffect(() => {
-    if (searchKey !== null) {
+    if (searchPerformed && searchKey !== null) { 
       dispatch(fetchMovies(searchKey, page));
     }
-  }, [searchKey, page, dispatch]);
+  }, [searchKey, page, dispatch, searchPerformed]); 
 
   return (
     <section className="heroBanner">
