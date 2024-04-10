@@ -83,10 +83,10 @@ export const fetchMovieUpComing = () => async(dispatch) => {
   }
 }
 
-export const fetchHomeData = () => async (dispatch) => {
+export const fetchHomeData = (mediaType) => async (dispatch) => {
   dispatch(startLoadingMovies());
 
-  const homeUrl = `http://localhost:8000/home`;
+  const homeUrl = `http://localhost:8000/home/${mediaType}`; // Incluye mediaType en la URL
 
   try {
     const homeResponse = await fetch(homeUrl);

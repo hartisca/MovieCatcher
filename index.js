@@ -136,23 +136,21 @@ app.get("/movies/upcoming", async (req, res) => {
   }
 });
 
-app.get("/home", async (req, res) => {
+app.get("/home/:mediaType", async (req, res) => {
   try {
-    let trendingQueryParams = {
-      api_key: API_KEY,
-    };
+    const { mediaType } = req.params; // Recuperar el parámetro mediaType de la URL
 
-    const trendingUrl = `${API_URL}/trending/movie/day?${new URLSearchParams(
-      trendingQueryParams
-    ).toString()}`;
-
-    let topRatedQueryParams = {
-      api_key: API_KEY,
-    };
-
-    const topRatedUrl = `${API_URL}/movie/top_rated?${new URLSearchParams(
-      topRatedQueryParams
-    ).toString()}`;
+    // Lógica para construir las URLs basadas en el valor de mediaType
+    let trendingUrl, topRatedUrl;
+    if (mediaType === 'movie') {
+      trendingUrl = `${API_URL}/trending/movie/day?api_key=${API_KEY}`;
+      topRatedUrl = `${API_URL}/movie/top_rated?api_key=${API_KEY}`;
+    } else if (mediaType === 'tv') {
+      trendingUrl = `${API_URL}/trending/tv/day?api_key=${API_KEY}`;
+      topRatedUrl = `${API_URL}/tv/top_rated?api_key=${API_KEY}`;
+    } else {
+      throw new Error('Invalid mediaType');
+    }
 
     const trendingResponse = await fetch(trendingUrl);
     const topRatedResponse = await fetch(topRatedUrl);
@@ -177,5 +175,6 @@ app.get("/home", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 app.listen(8000, () => console.log(`Server running on port ${PORT}`));

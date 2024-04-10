@@ -1,11 +1,11 @@
 import Trending from "../components/movies/Trending"
 
-const Home = () => {
+const Home = () => { 
   return (
     <>
-      <div><Trending /></div>      
+      <div><Trending /></div>
     </>
-  )
-}
+  );
+};
 
 export default Home

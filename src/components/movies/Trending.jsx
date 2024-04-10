@@ -7,23 +7,24 @@ import Carousel from "../carousel/Carousel";
 
 const Trending = () => {
   const dispatch = useDispatch();
-  const { trending, topRated } = useSelector((state) => state.movie);  
+  const { trending, topRated, mediaType } = useSelector((state) => state.movie);
 
   useEffect(() => {
-    dispatch(fetchHomeData())    
-  }, [dispatch]);
+    dispatch(fetchHomeData(mediaType))    
+  }, [dispatch, mediaType]);
 
   return (
     <section className="carouselSection">
-      <ContentWrapper>
-        <span className="carouselTitle">Trending Movies</span>        
-      </ContentWrapper>
-      <Carousel data={ trending } />
-      <ContentWrapper>
-        <span className="carouselTitle">Popular Movies</span>        
-      </ContentWrapper>
-      <Carousel data={ topRated } />
-    </section>
+    <ContentWrapper>
+      <span className="carouselTitle">{mediaType === 'movie' ? 'Trending Movies' : 'Trending TV Shows'}</span>        
+    </ContentWrapper>
+    <Carousel data={ trending } />
+    <ContentWrapper>
+      <span className="carouselTitle">{mediaType === 'movie' ? 'Top Rated Movies' : 'Top Rated TV Shows'}</span>        
+    </ContentWrapper>
+    <Carousel data={ topRated } />
+    <button className="discoverMoreButton">Discover More {mediaType === 'movie' ? 'Movies' : 'TV Shows'}</button>
+  </section>
   )
 }
 
