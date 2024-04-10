@@ -14,7 +14,7 @@ import {
 
 const Carousel = ({data}) => {
   const carouselContainer = useRef();
-  const URL_IMAGE = "https://image.tmdb.org/t/p/original";  
+  const URL_IMAGE = "https://image.tmdb.org/t/p/original";
   
   const navigation = (dir) => {
     const container = carouselContainer.current;
@@ -42,7 +42,7 @@ return (
               ? URL_IMAGE + item.poster_path
               : PosterFallBack;
             return (
-              <Link key={item.id} className="carouselItem" to={`/${data.media_type}/${data.id}`}>
+              <Link key={item.id} className="carouselItem" to={`/${item.media_type}/${item.id}`}>
                 <div className="posterBlock">
                   <Img src={posterUrl} />
                   <CircleRating rating={item.vote_average.toFixed(1)} />                                  

@@ -1,17 +1,16 @@
 import ContentWrapper from "../contentWrapper/ContentWrapper"
 import "./style.scss"
-import { fetchTrendingData } from "../../slices/movies/thunks"
+import { fetchHomeData } from "../../slices/movies/thunks"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "../carousel/Carousel";
 
 const Trending = () => {
   const dispatch = useDispatch();
-  const { trending } = useSelector((state) => state.movie);
-  
+  const { trending, topRated } = useSelector((state) => state.movie);  
 
   useEffect(() => {
-    dispatch(fetchTrendingData())    
+    dispatch(fetchHomeData())    
   }, [dispatch]);
 
   return (
@@ -20,6 +19,10 @@ const Trending = () => {
         <span className="carouselTitle">Trending Movies</span>        
       </ContentWrapper>
       <Carousel data={ trending } />
+      <ContentWrapper>
+        <span className="carouselTitle">Popular Movies</span>        
+      </ContentWrapper>
+      <Carousel data={ topRated } />
     </section>
   )
 }

@@ -136,50 +136,42 @@ app.get("/movies/upcoming", async (req, res) => {
   }
 });
 
-app.get("/trending/movie", async (req, res) => {
+app.get("/home", async (req, res) => {
   try {
-    let queryParams = {
+    let trendingQueryParams = {
       api_key: API_KEY,
     };
 
-    const url = `${API_URL}/trending/movie/day?${new URLSearchParams(
-      queryParams
+    const trendingUrl = `${API_URL}/trending/movie/day?${new URLSearchParams(
+      trendingQueryParams
     ).toString()}`;
-    
-    const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(`Error fetching data: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    const results = data.results;
-    res.json(results);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-app.get("/top/movie", async (req, res) => {
-  try {
-    let queryParams = {
+    let topRatedQueryParams = {
       api_key: API_KEY,
     };
 
-    const url = `${API_URL}/movie/top_rated?${new URLSearchParams(
-      queryParams
+    const topRatedUrl = `${API_URL}/movie/top_rated?${new URLSearchParams(
+      topRatedQueryParams
     ).toString()}`;
-    
-    const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(`Error fetching data: ${response.statusText}`);
+    const trendingResponse = await fetch(trendingUrl);
+    const topRatedResponse = await fetch(topRatedUrl);
+
+    if (!trendingResponse.ok || !topRatedResponse.ok) {
+      throw new Error(
+        `Error fetching data: ${
+          trendingResponse.statusText || topRatedResponse.statusText
+        }`
+      );
     }
 
-    const data = await response.json();
-    const results = data.results;
-    res.json(results);
+    const trendingData = await trendingResponse.json();
+    const topRatedData = await topRatedResponse.json();
+
+    const trendingResults = trendingData.results;
+    const topRatedResults = topRatedData.results;
+
+    res.json({ trending: trendingResults, topRated: topRatedResults });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

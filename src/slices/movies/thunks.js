@@ -83,49 +83,26 @@ export const fetchMovieUpComing = () => async(dispatch) => {
   }
 }
 
-export const fetchTrendingData = () => async(dispatch) => {
+export const fetchHomeData = () => async (dispatch) => {
   dispatch(startLoadingMovies());
 
-  const url = `http://localhost:8000/trending/movie`
+  const homeUrl = `http://localhost:8000/home`;
 
   try {
-    
-    const response = await fetch(url);
+    const homeResponse = await fetch(homeUrl);
 
-    if (!response.ok) {
-      throw new Error(`Error fetching trending movies: ${response.statusText}`);
+    if (!homeResponse.ok) {
+      throw new Error(`Error fetching home data: ${homeResponse.statusText}`);
     }
 
-    const data = await response.json();
-    dispatch(setTrending(data));
-    
+    const homeData = await homeResponse.json();
+
+    dispatch(setTrending(homeData.trending));
+    dispatch(setTopRated(homeData.topRated));
   } catch (error) {
     console.error(error);
     throw error;
   } finally {
     dispatch(finishLoadingMovies());
   }
-}
-
-export const fetchTopRatedMovies = () => async(dispatch) => {
-  dispatch(startLoadingMovies());
-
-  const url = `http://localhost:8000/top/movie`
-
-  try {    
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`Error fetching top movies: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    dispatch(setTopRated(data));
-    
-  } catch (error) {
-    console.error(error);
-    throw error;
-  } finally {
-    dispatch(finishLoadingMovies());
-  }
-}
+};

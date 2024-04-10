@@ -7,6 +7,7 @@ export const movieSlice = createSlice({
    upcoming: [],
    trending: [],
    topRated: [],
+   mediaType: 'movie',
    movie: {
     id: "",
     imdb_id: "",
@@ -63,10 +64,15 @@ export const movieSlice = createSlice({
   },
   setTopRated: (state, action) => {
     state.topRated = action.payload;
+  },
+  setMediaType: (state, action) =>{
+    state.mediaType = action.payload;
   }
 },
 })
 
-export const { setMovies, startLoadingMovies, finishLoadingMovies, setPage, setSearchKey, setMovie, setStreamingInfo, setVideo, setGenre, setUpcoming, setTrending, setTopRated } = movieSlice.actions
+export const { setMovies, startLoadingMovies, finishLoadingMovies, setPage, 
+  setSearchKey, setMovie, setStreamingInfo, setVideo, setGenre, setUpcoming, 
+  setTrending, setTopRated, setMediaType } = movieSlice.actions
 
 export const movieReducer = movieSlice.reducer

@@ -1,10 +1,16 @@
-import { useState } from "react";
 import  logo  from "../../img/Logo.png"
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setMediaType } from "../../slices/movies/movieSlice";
+
 const Header = () => {  
-  const [ show, setShow ] = useState("top")
-  const [ lastScrollY, setLastScrollY ] = useState(0)
-  const [ mobileMenu, setMobileMenu ] = useState(false)
+  
+  const mediaType = useSelector(state => state.movie.mediaType);
+  const dispatch = useDispatch();
+
+  const handleMediaTypeClick = (type) => {
+    dispatch(setMediaType(type));
+  };
   
   return (
     <>
@@ -13,8 +19,8 @@ const Header = () => {
           <img src={logo} alt="MovieCatcher Logo" width="150px"/>
         </Link>
         <ul className="menuItems">
-          <li className="menuItem">Movies</li>
-          <li className="menuItem">Tv Shows</li>          
+          <li className={`menuItem ${mediaType === 'movie' ? 'active' : ''}`} onClick={() => handleMediaTypeClick('movie')}>Movies</li>
+          <li className={`menuItem ${mediaType === 'tv' ? 'active' : ''}`} onClick={() => handleMediaTypeClick('tv')}>Tv Shows</li>          
         </ul>
       </nav>      
     </>

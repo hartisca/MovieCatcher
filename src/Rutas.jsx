@@ -9,8 +9,8 @@ import Home from "./pages/Home";
 const Rutas = () => (
   <Routes>
     <Route path="/" element={<Home />}></Route>
-    <Route path="/movies" element={<MovieLists />}></Route>
-    <Route path="/movies/:id" element={<MovieShow />} />
+    <Route path="/movie" element={<MovieLists />}></Route>
+    <Route path="/movie/:id" element={<MovieShow />} />
     <Route path="/:mediaType/:id" element={<Details />}></Route>
     <Route path="/search/:query" element={<SearchResult />}></Route>
     <Route path="*" element={<PageNotFound />}></Route>
