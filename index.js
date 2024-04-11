@@ -50,10 +50,10 @@ app.get("/home/:mediaType", async (req, res) => {
   }
 });
 
-app.get("/movies", async (req, res) => {
+app.get("/discover", async (req, res) => {
   try {
-    const { page, searchKey, selectedGenre } = req.query;
-
+    const { page, searchKey, selectedGenre, mediaType } = req.query;
+    console.log(mediaType)
     let url;
     let queryParams = {
       api_key: API_KEY,
@@ -64,10 +64,10 @@ app.get("/movies", async (req, res) => {
     }
 
     if (searchKey) {
-      url = `${API_URL}/search/movie?query=${searchKey}&api_key=${API_KEY}`;
+      url = `${API_URL}/search/${mediaType}?query=${searchKey}&api_key=${API_KEY}`;
     } else {
       queryParams.page = page;
-      url = `${API_URL}/discover/movie?${new URLSearchParams(
+      url = `${API_URL}/discover/${mediaType}?${new URLSearchParams(
         queryParams
       ).toString()}`;
     }
@@ -171,6 +171,7 @@ app.get("/movies/upcoming", async (req, res) => {
     const data = await response.json();
     const results = data.results;
     res.json(results);
+    console.log(results)
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

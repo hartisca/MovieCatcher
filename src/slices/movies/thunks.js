@@ -1,6 +1,6 @@
 import { setMovies, startLoadingMovies, finishLoadingMovies, setMovie, setStreamingInfo, setVideo, setUpcoming, setPage, setTrending, setTopRated } from "./movieSlice";
 
-export const fetchMovies = (searchKey, page, selectedGenre) => async (dispatch) => {
+export const fetchMovies = (searchKey, page, selectedGenre, mediaType) => async (dispatch) => {
   dispatch(startLoadingMovies());
 
   if (page === null) {
@@ -11,11 +11,12 @@ export const fetchMovies = (searchKey, page, selectedGenre) => async (dispatch) 
   let queryParams = {
     searchKey,
     page,
-    selectedGenre
+    selectedGenre,
+    mediaType
   };  
 
   const queryString = new URLSearchParams(queryParams).toString();
-  const url = `http://localhost:8000/movies?${queryString}`;
+  const url = `http://localhost:8000/discover?${queryString}`;
   
   try {
     const response = await fetch(url);

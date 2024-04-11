@@ -4,14 +4,18 @@ import { fetchHomeData } from "../../slices/movies/thunks"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "../carousel/Carousel";
+import { useNavigate } from 'react-router-dom';
 
 const Trending = () => {
   const dispatch = useDispatch();
   const { trending, topRated, mediaType } = useSelector((state) => state.movie);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchHomeData(mediaType))    
   }, [dispatch, mediaType]);
+
+  
 
   return (
     <section className="carouselSection">
@@ -23,7 +27,7 @@ const Trending = () => {
       <span className="carouselTitle">{mediaType === 'movie' ? 'Top Rated Movies' : 'Top Rated TV Shows'}</span>        
     </ContentWrapper>
     <Carousel data={ topRated } />
-    <button className="discoverMoreButton">Discover More {mediaType === 'movie' ? 'Movies' : 'TV Shows'}</button>
+    <button className="discoverMoreButton" onClick={navigate("/discover")}>Discover More {mediaType === 'movie' ? 'Movies' : 'TV Shows'}</button>
   </section>
   )
 }
