@@ -15,7 +15,9 @@ const Trending = () => {
     dispatch(fetchHomeData(mediaType))    
   }, [dispatch, mediaType]);
 
-  
+  const handleDiscoverMore = () =>{
+    navigate("/discover")
+  }
 
   return (
     <section className="carouselSection">
@@ -27,7 +29,7 @@ const Trending = () => {
       <span className="carouselTitle">{mediaType === 'movie' ? 'Top Rated Movies' : 'Top Rated TV Shows'}</span>        
     </ContentWrapper>
     <Carousel data={ topRated } />
-    <button className="discoverMoreButton" onClick={navigate("/discover")}>Discover More {mediaType === 'movie' ? 'Movies' : 'TV Shows'}</button>
+    <button className="discoverMoreButton" onClick={handleDiscoverMore}>Discover More {mediaType === 'movie' ? 'Movies' : 'TV Shows'}</button>
   </section>
   )
 }

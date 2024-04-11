@@ -1,16 +1,12 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies } from "../../slices/movies/thunks";
-import { MovieList } from "./MovieList";
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchMovies } from '../slices/movies/thunks';
+import MovieList from '../components/movies/MovieLists';
+import SideBar from '../layout/Sidebar';
 import RotateLoader from "react-spinners/ClipLoader";
-import {
-  usePreviousPageHandler,
-  useNextPageHandler,
-} from "../../functions/moviesFuntions";
-import SideBar from "../../layout/Sidebar";
-import './style.scss';
+import { setPage } from '../slices/movies/movieSlice';
 
-const MovieLists = () => {
+const Discover = () => {
   const [visibleMovies, setVisibleMovies] = useState(6);
   const {
     movies = [],
@@ -22,8 +18,15 @@ const MovieLists = () => {
   } = useSelector((state) => state.movie);
   const dispatch = useDispatch();
 
-  const handlePreviousPage = usePreviousPageHandler();
-  const handleNextPage = useNextPageHandler();
+  const handlePreviousPage = () => {
+    const prevPage = page - 1;
+    dispatch(setPage(prevPage));
+  };
+  const handleNextPage = () => {
+    const nextPage = page + 1;
+
+    dispatch(setPage(nextPage));
+  };
 
   const handleLoadMore = () => {
     setVisibleMovies((prev) => prev + 6);
@@ -32,7 +35,10 @@ const MovieLists = () => {
   useEffect(() => {    
     dispatch(fetchMovies(searchKey, page, selectedGenre, mediaType));    
   }, [searchKey, page, selectedGenre, mediaType, dispatch]);
-
+  console.log(mediaType)
+  console.log(searchKey)
+  console.log(page)
+  console.log(selectedGenre)
   return (
     <>
       <div className="containerMovieList">
@@ -84,4 +90,4 @@ const MovieLists = () => {
   );
 };
 
-export default MovieLists;
+export default Discover

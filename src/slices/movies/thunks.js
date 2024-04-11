@@ -16,7 +16,7 @@ export const fetchMovies = (searchKey, page, selectedGenre, mediaType) => async 
   };  
 
   const queryString = new URLSearchParams(queryParams).toString();
-  const url = `http://localhost:8000/discover?${queryString}`;
+  const url = `http://localhost:8000/movie?${queryString}`;
   
   try {
     const response = await fetch(url);
@@ -87,7 +87,7 @@ export const fetchMovieUpComing = () => async(dispatch) => {
 export const fetchHomeData = (mediaType) => async (dispatch) => {
   dispatch(startLoadingMovies());
 
-  const homeUrl = `http://localhost:8000/home/${mediaType}`; // Incluye mediaType en la URL
+  const homeUrl = `http://localhost:8000/home/${mediaType}`;
 
   try {
     const homeResponse = await fetch(homeUrl);

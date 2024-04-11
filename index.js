@@ -10,11 +10,35 @@ app.use(cors());
 const API_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
+app.get("/movies/upcoming", async (req, res) => {
+  try {
+    let queryParams = {
+      api_key: API_KEY,
+    };
+
+    const url = `${API_URL}/movie/upcoming?${new URLSearchParams(
+      queryParams
+    ).toString()}`;
+
+    const response = await fetch(url);
+    console.log(url)
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const results = data.results;
+    res.json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.get("/home/:mediaType", async (req, res) => {
   try {
-    const { mediaType } = req.params; // Recuperar el parámetro mediaType de la URL
+    const { mediaType } = req.params; 
 
-    // Lógica para construir las URLs basadas en el valor de mediaType
     let trendingUrl, topRatedUrl;
     if (mediaType === 'movie') {
       trendingUrl = `${API_URL}/trending/movie/day?api_key=${API_KEY}`;
@@ -50,10 +74,10 @@ app.get("/home/:mediaType", async (req, res) => {
   }
 });
 
-app.get("/discover", async (req, res) => {
+app.get("/movie", async (req, res) => {
   try {
     const { page, searchKey, selectedGenre, mediaType } = req.query;
-    console.log(mediaType)
+
     let url;
     let queryParams = {
       api_key: API_KEY,
@@ -64,7 +88,7 @@ app.get("/discover", async (req, res) => {
     }
 
     if (searchKey) {
-      url = `${API_URL}/search/${mediaType}?query=${searchKey}&api_key=${API_KEY}`;
+      url = `${API_URL}/search/movie?query=${searchKey}&api_key=${API_KEY}`;
     } else {
       queryParams.page = page;
       url = `${API_URL}/discover/${mediaType}?${new URLSearchParams(
@@ -88,6 +112,8 @@ app.get("/discover", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
 
 app.get("/:mediaType/:id", async (req, res) => {
   try {
@@ -151,34 +177,6 @@ app.get("/:mediaType/:id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
-app.get("/movies/upcoming", async (req, res) => {
-  try {
-    let queryParams = {
-      api_key: API_KEY,
-    };
-
-    const url = `${API_URL}/movie/upcoming?${new URLSearchParams(
-      queryParams
-    ).toString()}`;
-
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`Error fetching data: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    const results = data.results;
-    res.json(results);
-    console.log(results)
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-
 
 
 app.listen(8000, () => console.log(`Server running on port ${PORT}`));
