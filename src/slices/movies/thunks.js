@@ -35,10 +35,10 @@ export const fetchMovies = (searchKey, page, selectedGenre) => async (dispatch) 
   }
 };
 
-export const fetchMovieAction = (id) => async (dispatch) => {
-  dispatch(startLoadingMovies());
+export const fetchMovieAction = (id, mediaType) => async (dispatch) => {
+  dispatch(startLoadingMovies());  
   
-  const url = `http://localhost:8000/movie/${id}`;
+  const url = `http://localhost:8000/${mediaType}/${id}`;
   
   try {
     const response = await fetch(url);

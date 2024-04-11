@@ -10,8 +10,44 @@ app.use(cors());
 const API_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
-app.get("/", (req, res) => {
-  res.json("Welcome to the Movie API!");
+app.get("/home/:mediaType", async (req, res) => {
+  try {
+    const { mediaType } = req.params; // Recuperar el parámetro mediaType de la URL
+
+    // Lógica para construir las URLs basadas en el valor de mediaType
+    let trendingUrl, topRatedUrl;
+    if (mediaType === 'movie') {
+      trendingUrl = `${API_URL}/trending/movie/day?api_key=${API_KEY}`;
+      topRatedUrl = `${API_URL}/movie/top_rated?api_key=${API_KEY}`;
+    } else if (mediaType === 'tv') {
+      trendingUrl = `${API_URL}/trending/tv/day?api_key=${API_KEY}`;
+      topRatedUrl = `${API_URL}/tv/top_rated?api_key=${API_KEY}`;
+    } else {
+      throw new Error('Invalid mediaType');
+    }
+
+    const trendingResponse = await fetch(trendingUrl);
+    const topRatedResponse = await fetch(topRatedUrl);
+
+    if (!trendingResponse.ok || !topRatedResponse.ok) {
+      throw new Error(
+        `Error fetching data: ${
+          trendingResponse.statusText || topRatedResponse.statusText
+        }`
+      );
+    }
+
+    const trendingData = await trendingResponse.json();
+    const topRatedData = await topRatedResponse.json();
+
+    const trendingResults = trendingData.results;
+    const topRatedResults = topRatedData.results;
+
+    res.json({ trending: trendingResults, topRated: topRatedResults });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 app.get("/movies", async (req, res) => {
@@ -53,16 +89,16 @@ app.get("/movies", async (req, res) => {
   }
 });
 
-app.get("/movie/:id", async (req, res) => {
+app.get("/:mediaType/:id", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { mediaType, id } = req.params;
 
     let queryParams = {
       api_key: API_KEY,
       append_to_response: "videos",
     };
 
-    const url = `${API_URL}/movie/${id}?${new URLSearchParams(
+    const url = `${API_URL}/${mediaType}/${id}?${new URLSearchParams(
       queryParams
     ).toString()}`;
 
@@ -82,7 +118,7 @@ app.get("/movie/:id", async (req, res) => {
       );
     }
 
-    const streamingUrl = `https://streaming-availability.p.rapidapi.com/get?tmdb_id=movie/${id}`;
+    const streamingUrl = `https://streaming-availability.p.rapidapi.com/get?tmdb_id=${mediaType}/${id}`;
     const streamingOptions = {
       method: "GET",
       headers: {
@@ -92,6 +128,11 @@ app.get("/movie/:id", async (req, res) => {
     };
     const streamingResponse = await fetch(streamingUrl, streamingOptions);
     const streamingData = await streamingResponse.json();
+    let streamingInfo = [];
+
+    if (streamingData.result && streamingData.result.streamingInfo && streamingData.result.streamingInfo.es) {
+    streamingInfo = streamingData.result.streamingInfo.es;
+}
 
     const movieData = {
       id,
@@ -101,7 +142,7 @@ app.get("/movie/:id", async (req, res) => {
       poster: poster_path,
       vote_average,
       trailer,
-      streamingInfo: streamingData.result.streamingInfo.es,
+      streamingInfo
     };
 
     res.json(movieData);
@@ -136,45 +177,7 @@ app.get("/movies/upcoming", async (req, res) => {
   }
 });
 
-app.get("/home/:mediaType", async (req, res) => {
-  try {
-    const { mediaType } = req.params; // Recuperar el parámetro mediaType de la URL
 
-    // Lógica para construir las URLs basadas en el valor de mediaType
-    let trendingUrl, topRatedUrl;
-    if (mediaType === 'movie') {
-      trendingUrl = `${API_URL}/trending/movie/day?api_key=${API_KEY}`;
-      topRatedUrl = `${API_URL}/movie/top_rated?api_key=${API_KEY}`;
-    } else if (mediaType === 'tv') {
-      trendingUrl = `${API_URL}/trending/tv/day?api_key=${API_KEY}`;
-      topRatedUrl = `${API_URL}/tv/top_rated?api_key=${API_KEY}`;
-    } else {
-      throw new Error('Invalid mediaType');
-    }
-
-    const trendingResponse = await fetch(trendingUrl);
-    const topRatedResponse = await fetch(topRatedUrl);
-
-    if (!trendingResponse.ok || !topRatedResponse.ok) {
-      throw new Error(
-        `Error fetching data: ${
-          trendingResponse.statusText || topRatedResponse.statusText
-        }`
-      );
-    }
-
-    const trendingData = await trendingResponse.json();
-    const topRatedData = await topRatedResponse.json();
-
-    const trendingResults = trendingData.results;
-    const topRatedResults = topRatedData.results;
-
-    res.json({ trending: trendingResults, topRated: topRatedResults });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
 
 
 app.listen(8000, () => console.log(`Server running on port ${PORT}`));

@@ -23,7 +23,7 @@ const serviceIcons = {
 export const MovieShow = () => {
   const URL_IMAGE = 'https://image.tmdb.org/t/p/original';
   const { id } = useParams();
-  const { movie, streamingInfo, video, searchKey } = useSelector((state) => state.movie);
+  const { movie, streamingInfo, video, searchKey, mediaType } = useSelector((state) => state.movie);
   const dispatch = useDispatch();  
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ export const MovieShow = () => {
   };
  
   useEffect(() => {
-    dispatch(fetchMovieAction(id));    
+    dispatch(fetchMovieAction(id, mediaType));    
   }, [id]);
 
   useEffect(() => {    
@@ -84,19 +84,21 @@ export const MovieShow = () => {
             <fieldset className='fieldSet'>
               <legend>Watch On</legend>
               {streamingInfo && streamingInfo.length > 0 ? (
-                <div className="streamingIconsContainer">
-                  {Array.from(uniqueServices).map(service => (
-                    serviceIcons[service] && (
-                      <img
-                        key={service}
-                        src={serviceIcons[service]}
-                        alt={`${service} icon`}
-                        className='streamingIcon'
-                      />
-                    )
-                  ))}
-              </div>
-              ) : ('Not available on streaming services')}
+  <div className="streamingIconsContainer">
+    {Array.from(uniqueServices).map(service => (
+      serviceIcons[service] && (
+        <img
+          key={service}
+          src={serviceIcons[service]}
+          alt={`${service} icon`}
+          className='streamingIcon'
+        />
+      )
+    ))}
+  </div>
+) : (
+  <div>Not available on streaming services</div>
+)}
             </fieldset>
           </div>          
         </div>
