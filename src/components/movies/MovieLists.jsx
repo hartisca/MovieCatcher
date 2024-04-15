@@ -7,11 +7,11 @@ import {
   usePreviousPageHandler,
   useNextPageHandler,
 } from "../../functions/moviesFuntions";
-import SideBar from "../../layout/Sidebar";
+import Genres from "../../layout/Genres";
 import './style.scss';
 
 const MovieLists = () => {
-  const [visibleMovies, setVisibleMovies] = useState(6);
+  const [visibleMovies, setVisibleMovies] = useState(8);
   const {
     movies = [],
     isLoading,
@@ -26,7 +26,7 @@ const MovieLists = () => {
   const handleNextPage = useNextPageHandler();
 
   const handleLoadMore = () => {
-    setVisibleMovies((prev) => prev + 6);
+    setVisibleMovies((prev) => prev + 8);
   };
 
   useEffect(() => {    
@@ -37,7 +37,7 @@ const MovieLists = () => {
     <>
       <div className="containerMovieList">
         <div className="stickyNav">
-          <SideBar />
+          <Genres />
         </div>
         <div className="moviesContainer">
           {isLoading ? (

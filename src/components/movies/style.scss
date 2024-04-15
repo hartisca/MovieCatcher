@@ -2,23 +2,19 @@
 
 /*Movie Grid CSS*/
 .containerMovieList {
-  display: grid;
-  grid-template-columns: 9.5% 1fr 1fr 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;  
   padding-top: 75px;
   max-width: 100%;
   margin: 0 auto;
+  align-items: center;
+  justify-content: center;
 }
-.stickyNav {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-}
+
 .genreTag {
   margin-bottom: 5px;
   text-align: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 10px 15px;
   border-radius: 50px;
   border: solid 1px var(--secondary);
 }
@@ -29,21 +25,35 @@
 .selectedTag {
   margin-bottom: 5px;
   text-align: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 10px 15px;
   border-radius: 50px;
   border: solid 1px var(--secondary);
   background-color: var(--borders);
+}
+.sideBarGenres{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+.stickyNav{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 35px;
 }
 .moviesContainer {
   grid-column: span 3;
 }
 .containerGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   row-gap: 25px;
   margin: 0 auto;
   max-width: 75%;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 .movieCardContainer {
   position: relative;

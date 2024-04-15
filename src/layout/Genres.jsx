@@ -1,9 +1,8 @@
-import { IoFilter } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { setGenre } from "../slices/movies/movieSlice";
 import { useState } from "react";
 
-const SideBar = () =>{
+const Genres = () =>{
   const [selected, setSelected] = useState(null);  
   const dispatch = useDispatch();  
 
@@ -36,9 +35,8 @@ const SideBar = () =>{
   ];
 
   return(
-    <>
-    <p style={{ marginLeft: '10px' }}><IoFilter /> Filter</p>
-    <nav className={`sideBarGenres`}>
+    <>    
+    <nav className='sideBarGenres'>
         {genres.map((genre) => (
           <div
             key={genre.id}
@@ -53,4 +51,4 @@ const SideBar = () =>{
   )
 }
 
-export default SideBar;
+export default Genres;
