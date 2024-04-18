@@ -28,10 +28,14 @@
   --input: #e2e1e1;
 }
 
-body{
-  box-sizing: border-box;
-  padding: 0;
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 a {

@@ -49,6 +49,7 @@ export const fetchMovieAction = (id, mediaType) => async (dispatch) => {
     }
 
     const data = await response.json();
+    
     dispatch(setMovie(data));
     dispatch(setStreamingInfo(data.streamingInfo));
     dispatch(setVideo(data.trailer))

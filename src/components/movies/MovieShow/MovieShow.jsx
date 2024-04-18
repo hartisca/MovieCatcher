@@ -4,6 +4,7 @@ import { fetchMovieAction } from "../../../slices/movies/thunks";
 import { useParams, useNavigate } from 'react-router-dom';
 import { renderStarIcons } from "../../../functions/moviesFuntions";
 import RotateLoader from "react-spinners/ClipLoader";
+import HeroBannerShow from "./HeroBannerShow";
 import { FaYoutube } from "react-icons/fa";
 import Youtube from 'react-youtube';
 import './style.scss';
@@ -62,6 +63,8 @@ export const MovieShow = () => {
       <RotateLoader margin="0 auto" color={"#ffff"} size={30} />
     </div>
     ):(
+    <section>
+    <HeroBannerShow /> 
     <div className='movieBigContainer'>
       <div className='titleBigCard'>
         <h4 >{movie.title}</h4>
@@ -114,7 +117,8 @@ export const MovieShow = () => {
             </div>
           </div>      
         </div>
-        )}
+        </section>
+        )}      
     </>
   )
 }

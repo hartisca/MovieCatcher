@@ -13,7 +13,8 @@ export const movieSlice = createSlice({
     imdb_id: "",
     title: "",
     overview: "",
-    poster: "",    
+    poster: "",
+    backdrop_path:"" 
    }, 
    isLoading: true,
    errors: "",

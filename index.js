@@ -133,7 +133,7 @@ app.get("/:mediaType/:id", async (req, res) => {
     }
 
     const data = await response.json();
-    const { imdb_id, title, overview, poster_path, vote_average } = data;
+    const { imdb_id, title, overview, poster_path, backdrop_path, vote_average } = data;
 
     let trailer = null;
     if (data.videos && data.videos.results) {
@@ -164,6 +164,7 @@ app.get("/:mediaType/:id", async (req, res) => {
       title,
       overview,
       poster: poster_path,
+      backdrop_path,
       vote_average,
       trailer,
       streamingInfo
