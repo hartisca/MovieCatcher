@@ -11,16 +11,15 @@ export const MovieList = ({ movie }) => {
     backgroundImage: `url(${URL_IMAGE + movie.poster_path})`,
     objectFit: 'cover',
     objectPosition: 'center',
-};
-  const dispatch = useDispatch();
-
+  };
+  const dispatch = useDispatch();  
   const handleMovieClick = () => {
     dispatch(setSearchKey(""));
   };
   
   return (
     <Link
-      to={`/movies/${movie.id}`}
+      to={`/movie/${movie.id}`}
       className="movieCardContainer"
       onClick={handleMovieClick}
     >

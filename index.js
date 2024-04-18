@@ -113,8 +113,6 @@ app.get("/movie", async (req, res) => {
   }
 });
 
-
-
 app.get("/:mediaType/:id", async (req, res) => {
   try {
     const { mediaType, id } = req.params;

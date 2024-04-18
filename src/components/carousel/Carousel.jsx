@@ -7,6 +7,7 @@ import ContentWrapper from "../contentWrapper/ContentWrapper";
 import Img from "../../components/lazyLoadImage/Img"
 import PosterFallBack from "../../assets/no-poster.png"
 import CircleRating from "../circleRating/CircleRating";
+import { useSelector } from "react-redux";
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
@@ -30,6 +31,8 @@ const Carousel = ({data}) => {
     });
   };
 
+  const { mediaType } = useSelector((state) => state.movie);
+
 return (
   <div className="carousel">
     <ContentWrapper>
@@ -42,7 +45,7 @@ return (
               ? URL_IMAGE + item.poster_path
               : PosterFallBack;
             return (
-              <Link key={item.id} className="carouselItem" to={`/${item.media_type}/${item.id}`}>
+              <Link key={item.id} className="carouselItem" to={`/${mediaType}/${item.id}`}>
                 <div className="posterBlock">
                   <Img src={posterUrl} />
                   <CircleRating rating={item.vote_average.toFixed(1)} />                                  
