@@ -9,7 +9,9 @@ export const MovieList = ({ movie }) => {
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
   const backgoundImageStyle = {
     backgroundImage: `url(${URL_IMAGE + movie.poster_path})`,
-  };
+    objectFit: 'cover',
+    objectPosition: 'center',
+};
   const dispatch = useDispatch();
 
   const handleMovieClick = () => {

@@ -9,38 +9,37 @@
   margin: 0 auto;
   align-items: center;
   justify-content: center;
-}
-
-.genreTag {
-  margin-bottom: 5px;
-  text-align: center;
-  padding: 10px 15px;
-  border-radius: 50px;
-  border: solid 1px var(--secondary);
-}
-.genreTag:hover {
-  background-color: var(--borders);
-  cursor: pointer;
-}
-.selectedTag {
-  margin-bottom: 5px;
-  text-align: center;
-  padding: 10px 15px;
-  border-radius: 50px;
-  border: solid 1px var(--secondary);
-  background-color: var(--borders);
-}
-.sideBarGenres{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-}
-.stickyNav{
-  display: flex;
-  justify-content: center;
-  margin-bottom: 35px;
+  .stickyNav{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 35px;
+  }
+  .genreTag {
+    margin-bottom: 5px;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 50px;
+    border: solid 1px var(--secondary);
+  }
+  .genreTag:hover {
+    background-color: var(--borders);
+    cursor: pointer;
+  }
+  .selectedTag {
+    margin-bottom: 5px;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 50px;
+    border: solid 1px var(--secondary);
+    background-color: var(--borders);
+  }
+  .sideBarGenres{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+  }
 }
 .moviesContainer {
   grid-column: span 3;
@@ -57,8 +56,8 @@
 }
 .movieCardContainer {
   position: relative;
-  width: 300px;
-  height: 450px;
+  width: 280px;
+  height: 420px;
   animation: fadeIn 1s ease-in-out forwards;
   border: 1px solid var(--borders);
   border-radius: 15px;
