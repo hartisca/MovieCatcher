@@ -9,6 +9,7 @@ import {
 } from "../../functions/moviesFuntions";
 import Genres from "../../layout/Genres";
 import './style.scss';
+import HeroBanner from "../../layout/HeroBanner/HeroBanner";
 
 const MovieLists = () => {
   const [visibleMovies, setVisibleMovies] = useState(8);
@@ -35,6 +36,7 @@ const MovieLists = () => {
 
   return (
     <>
+      <HeroBanner />
       <div className="containerMovieList">
         <div className="stickyNav">
           <Genres />

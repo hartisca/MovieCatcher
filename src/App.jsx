@@ -1,7 +1,6 @@
 import './App.css'
 import Rutas from './Rutas'
 import Footer from './layout/Footer/Footer'
-import HeroBanner from './layout/HeroBanner/HeroBanner'
 import Header from './layout/HeroBanner/Header'
 
 function App() {
@@ -9,7 +8,6 @@ function App() {
   return (
     <div style={{scrollBehavior: 'smooth'}}>
       <Header />      
-      <HeroBanner />
       <Rutas />
       <Footer />
     </div>

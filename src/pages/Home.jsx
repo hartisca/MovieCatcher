@@ -1,9 +1,13 @@
 import Trending from "../components/movies/Trending"
+import HeroBanner from "../layout/HeroBanner/HeroBanner"
 
 const Home = () => { 
   return (
-    <>
-      <div><Trending /></div>
+    <>      
+      <div>
+        <HeroBanner />
+        <Trending />
+      </div>
     </>
   );
 };

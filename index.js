@@ -21,7 +21,7 @@ app.get("/movies/upcoming", async (req, res) => {
     ).toString()}`;
 
     const response = await fetch(url);
-    console.log(url)
+    
     if (!response.ok) {
       throw new Error(`Error fetching data: ${response.statusText}`);
     }
