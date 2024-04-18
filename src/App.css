@@ -1,6 +1,4 @@
 @import "./mixins.scss";
-
-
 /* Cabecera CSS*/
 .header {
   display: flex;

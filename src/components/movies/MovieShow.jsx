@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { fetchMovieAction } from "../../slices/movies/thunks";
 import { useParams, useNavigate } from 'react-router-dom';
 import { renderStarIcons } from "../../functions/moviesFuntions";
+import RotateLoader from "react-spinners/ClipLoader";
 import { FaYoutube } from "react-icons/fa";
 import Youtube from 'react-youtube';
 import './style.scss';
@@ -23,7 +24,7 @@ const serviceIcons = {
 export const MovieShow = () => {
   const URL_IMAGE = 'https://image.tmdb.org/t/p/original';
   const { id } = useParams();
-  const { movie, streamingInfo, video, searchKey, mediaType } = useSelector((state) => state.movie);
+  const { movie, streamingInfo, video, searchKey, mediaType, isLoading } = useSelector((state) => state.movie);
   const dispatch = useDispatch();  
   const navigate = useNavigate();
 
@@ -51,6 +52,16 @@ export const MovieShow = () => {
   const trailer = video && video.key ? video.key : null;
   
   return (
+    <>
+    {isLoading?  (
+    <div
+      style={{ textAlign: "center", margin: "20px" }}
+      className="loadingContainer"
+    >
+      <span className="loadingSpan">Loading... </span>
+      <RotateLoader margin="0 auto" color={"#ffff"} size={30} />
+    </div>
+    ):(
     <div className='movieBigContainer'>
       <div className='titleBigCard'>
         <h4 >{movie.title}</h4>
@@ -80,29 +91,30 @@ export const MovieShow = () => {
              </div>              
               <span className='starColors'>Rating: {renderStarIcons(movie.vote_average / 2)}</span>              
             </div>
-
-            <fieldset className='fieldSet'>
-              <legend>Watch On</legend>
-              {streamingInfo && streamingInfo.length > 0 ? (
-  <div className="streamingIconsContainer">
-    {Array.from(uniqueServices).map(service => (
-      serviceIcons[service] && (
-        <img
-          key={service}
-          src={serviceIcons[service]}
-          alt={`${service} icon`}
-          className='streamingIcon'
-        />
-      )
-    ))}
-  </div>
-) : (
-  <div>Not available on streaming services</div>
-)}
-            </fieldset>
-          </div>          
+              <fieldset className='fieldSet'>
+                <legend>Watch On</legend>
+                {streamingInfo && streamingInfo.length > 0 ? (
+                <div className="streamingIconsContainer">
+                  {Array.from(uniqueServices).map(service => (
+                    serviceIcons[service] && (
+                      <img
+                        key={service}
+                        src={serviceIcons[service]}
+                        alt={`${service} icon`}
+                        className='streamingIcon'
+                      />
+                    )
+                  ))}
+                </div>
+                ) : (
+                  <div>Not available on streaming services</div>
+                )}
+              </fieldset>
+              </div>          
+            </div>
+          </div>      
         </div>
-      </div>      
-    </div>    
+        )}
+    </>
   )
 }

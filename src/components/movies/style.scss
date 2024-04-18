@@ -121,12 +121,7 @@
 .nextPageButton {
   justify-self: end;
 }
-.spinner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
+
 
 /*Movie Show */
 .movieBigContainer {
@@ -186,4 +181,15 @@
   width: 35px;
   margin: 0 3px;
   border-radius: 5px;
+}
+
+.loadingContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px
+}
+.loadingSpan{
+  color: white;
+  font-size: 24px;
 }

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { renderStarIcons } from "../../functions/moviesFuntions";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSearchKey } from "../../slices/movies/movieSlice";
 import './style.scss';
 
@@ -12,14 +12,15 @@ export const MovieList = ({ movie }) => {
     objectFit: 'cover',
     objectPosition: 'center',
   };
+  const { mediaType } = useSelector((state) => state.movie)
   const dispatch = useDispatch();  
   const handleMovieClick = () => {
-    dispatch(setSearchKey(""));
+    dispatch(setSearchKey(""));    
   };
   
   return (
     <Link
-      to={`/movie/${movie.id}`}
+      to={`/${mediaType}/${movie.id}`}
       className="movieCardContainer"
       onClick={handleMovieClick}
     >

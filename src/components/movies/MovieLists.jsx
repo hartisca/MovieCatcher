@@ -42,12 +42,12 @@ const MovieLists = () => {
         <div className="moviesContainer">
           {isLoading ? (
             <div
-              style={{ textAlign: "center", margin: "20px" }}
-              className="spinner"
-            >
-              <p>Loading... </p>
-              <RotateLoader margin="0 auto" color={"#950101"} size={30} />
-            </div>
+            style={{ textAlign: "center", margin: "20px" }}
+            className="loadingContainer"
+          >
+            <span className="loadingSpan">Loading... </span>
+            <RotateLoader margin="0 auto" color={"#ffff"} size={30} />
+          </div>
           ) : (
             <>
               <div className="containerGrid">
