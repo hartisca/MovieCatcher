@@ -15,11 +15,12 @@ const HeroBannerShow = () => {
     <>
       <div className="heroBannerContainer">
       <div className="backdrop-img">
-        <img
+        <Img
           className="backdrop-img__img"
           src={URL_IMAGE + movie.backdrop_path}
-          alt=""
+          alt={`Promotional Image for the movie ${movie.title}`}
         />
+        
       </div>
       <div className="opacity-layer"></div>
     </div>
