@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { fetchMovieAction } from "../../../slices/movies/thunks";
 import { useParams, useNavigate } from 'react-router-dom';
-import { renderStarIcons } from "../../../functions/moviesFuntions";
 import RotateLoader from "react-spinners/ClipLoader";
 import HeroBannerShow from "./HeroBannerShow";
 import { FaYoutube } from "react-icons/fa";
@@ -92,7 +91,6 @@ export const MovieShow = () => {
                   </div>
                 )}
              </div>              
-              <span className='starColors'>Rating: {renderStarIcons(movie.vote_average / 2)}</span>              
             </div>
               <fieldset className='fieldSet'>
                 <legend>Watch On</legend>

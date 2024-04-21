@@ -14,7 +14,9 @@ export const movieSlice = createSlice({
     title: "",
     overview: "",
     poster: "",
-    backdrop_path:"" 
+    backdrop_path:"",
+    tagline:"",
+    
    }, 
    isLoading: true,
    errors: "",

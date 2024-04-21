@@ -124,64 +124,6 @@
 
 
 /*Movie Show */
-.movieBigContainer {
-  margin: 0 auto;
-  max-width: 50%;
-  text-align: center;
-  border: 1px solid var(--borders);
-  border-radius: 10px;
-  margin-top: 50px;
-  box-sizing: border-box;
-}
-
-.titleBigCard {
-  font-size: var(--titulo-font-size);
-  border-bottom: 1px solid var(--borders);
-  padding-top: 1px;
-  box-sizing: inherit;
-  background-color: #30303075;
-  border-radius: 10px 10px 0 0;
-}
-.movieBigCard {
-  display: flex;
-  gap: 10px;
-  padding: 10px;
-  background-color: #302f2f;
-}
-.bigCardText {
-  text-align: start;
-  text-wrap: balance;
-  border: solid 1px var(--borders);
-  padding: 15px;
-  color: rgb(185, 185, 185);
-  font-size: var(--texto-font-size);
-}
-.textCard {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.starColors {
-  color: #e5a65e;
-}
-.streamInfoContainer {
-  display: flex;
-  border-color: var(--borders);
-  padding: 15px;
-  margin-bottom: 15px;
-  justify-content: space-around;
-  align-items: center;
-}
-.fieldSet {
-  border-color: var(--borders);
-  color: rgb(185, 185, 185);
-}
-.streamingIcon {
-  width: 35px;
-  margin: 0 3px;
-  border-radius: 5px;
-}
 
 .loadingContainer{
   display: flex;

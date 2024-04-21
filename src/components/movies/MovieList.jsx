@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { renderStarIcons } from "../../functions/moviesFuntions";
+
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchKey } from "../../slices/movies/movieSlice";
@@ -26,8 +26,7 @@ export const MovieList = ({ movie }) => {
     >
       <article className="movieCard" style={{ ...backgoundImageStyle }}>
         <div className="movieRatings">
-          <p>{movie.title}</p>
-          <span>{renderStarIcons(movie.vote_average / 2)}</span>
+          <p>{movie.title}</p>          
         </div>
       </article>
     </Link>
