@@ -6,7 +6,8 @@ import RotateLoader from "react-spinners/ClipLoader";
 import HeroBannerShow from "./HeroBannerShow";
 import './style.scss';
 
-export const MovieShow = () => {  
+export const MovieShow = () => {
+  
   const { id } = useParams();
   const { movie, searchKey, mediaType, isLoading } = useSelector((state) => state.movie);
   const dispatch = useDispatch();  

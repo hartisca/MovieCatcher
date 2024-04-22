@@ -78,13 +78,14 @@ const HeroBannerShow = () => {
             {movie.tagline}
           </h5>
           <div className='genresMovieShow'>
-            {movie.genres.map(genre => (
+            {movie.genres && movie.genres.map(genre => (
               <span className='genreMovieShowTag' key={genre.id}>{genre.name}</span>
             ))}
           </div>
           <div className='rowMovieShowContent'>
           <CircleRating
-            rating={movie.vote_average.toFixed(1)} />          
+            rating={movie.vote_average ? movie.vote_average.toFixed(1) : 0}
+          />          
           <div>
             <div className="youtube-icon" 
               onClick={trailer ? handleOpenModal : null}
