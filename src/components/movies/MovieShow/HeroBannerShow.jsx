@@ -17,7 +17,7 @@ import apple from "../../../img/apple.png";
 const HeroBannerShow = () => {
   
   const { movie, video, streamingInfo } = useSelector((state) => state.movie);
-  const URL_IMAGE = 'https://image.tmdb.org/t/p/original';  
+  const URL_IMAGE = 'https://image.tmdb.org/t/p/original';
   let [showModal, setShowModal] = useState(false);
   const uniqueServices = streamingInfo ? new Set(streamingInfo.map(service => service.service)) : new Set();
   const trailer = video && video.key ? video.key : null;

@@ -21,16 +21,16 @@ const Trending = () => {
 
   return (
     <section className="carouselSection">
-    <ContentWrapper>
-      <span className="carouselTitle">{mediaType === 'movie' ? 'Trending Movies' : 'Trending TV Shows'}</span>        
-    </ContentWrapper>
-    <Carousel data={ trending } />
-    <ContentWrapper>
-      <span className="carouselTitle">{mediaType === 'movie' ? 'Top Rated Movies' : 'Top Rated TV Shows'}</span>        
-    </ContentWrapper>
-    <Carousel data={ topRated } />
-    <button className="discoverMoreButton" onClick={handleDiscoverMore}>Discover More {mediaType === 'movie' ? 'Movies' : 'TV Shows'}</button>
-  </section>
+      <ContentWrapper>
+        <span className="carouselTitle">{mediaType === 'movie' ? 'Trending Movies' : 'Trending TV Shows'}</span>        
+      </ContentWrapper>
+      <Carousel data={ trending } />
+      <ContentWrapper>
+        <span className="carouselTitle">{mediaType === 'movie' ? 'Top Rated Movies' : 'Top Rated TV Shows'}</span>        
+      </ContentWrapper>
+      <Carousel data={ topRated } />
+      <button className="discoverMoreButton" onClick={handleDiscoverMore}>Discover More {mediaType === 'movie' ? 'Movies' : 'TV Shows'}</button>
+    </section>
   )
 }
 

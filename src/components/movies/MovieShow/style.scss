@@ -147,3 +147,29 @@
   }  
 }
 }
+
+.castContainer{
+  display: flex;  
+  justify-content: space-around;
+  align-items: center;
+  .heading{
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-decoration: underline;    
+  }
+  .directorName{
+    text-align: center;
+  }
+  img{
+    width: 150px;
+    border-radius: 10px;
+    border: 1px solid var(--borders);
+  }
+  .castSection{
+    display: flex;
+    gap: 8px;
+    .actorName{
+      text-align: center;
+    }
+  }
+}

@@ -157,7 +157,7 @@ app.get("/:mediaType/:id", async (req, res) => {
       directorProfilePath = director.profile_path;
     }
 
-    const cast = creditsData.cast.slice(0, 8).map(actor => ({
+    const cast = creditsData.cast.slice(0, 7).map(actor => ({
       name: actor.name,
       character: actor.character,
       profile_path: actor.profile_path
@@ -171,7 +171,9 @@ app.get("/:mediaType/:id", async (req, res) => {
       id: movie.id,
       title: movie.title,
       poster: movie.poster_path,
-      release_date: movie.release_date
+      release_date: movie.release_date,
+      backdrop_path: movie.backdrop_path,
+      vote_average: movie.vote_average
     }));
     
     //servicios de streaming

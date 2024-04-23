@@ -7,7 +7,6 @@ export const movieSlice = createSlice({
    upcoming: [],
    trending: [],
    topRated: [],
-   credits: [],
    similar: [],
    mediaType: 'movie',
    movie: {
@@ -74,9 +73,6 @@ export const movieSlice = createSlice({
   setMediaType: (state, action) =>{
     state.mediaType = action.payload;
   },
-  setCredits: (state, action) => {
-    state.credits = action.payload;
-  },
   setSimilar: (state, action) => {
     state.similar = action.payload;
   }
@@ -85,6 +81,6 @@ export const movieSlice = createSlice({
 
 export const { setMovies, startLoadingMovies, finishLoadingMovies, setPage, 
   setSearchKey, setMovie, setStreamingInfo, setVideo, setGenre, setUpcoming, 
-  setTrending, setTopRated, setMediaType, setCredits, setSimilar } = movieSlice.actions
+  setTrending, setTopRated, setMediaType, setSimilar } = movieSlice.actions
 
 export const movieReducer = movieSlice.reducer

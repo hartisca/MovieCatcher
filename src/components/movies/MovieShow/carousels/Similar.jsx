@@ -1,19 +1,18 @@
 /* eslint-disable react/prop-types */
-import "./style.scss"
-
-import { useRef } from "react";
-import { Link } from "react-router-dom";
-import ContentWrapper from "../contentWrapper/ContentWrapper";
-import Img from "../../components/lazyLoadImage/Img"
-import PosterFallBack from "../../assets/no-poster.png"
-import CircleRating from "../circleRating/CircleRating";
 import { useSelector } from "react-redux";
+import ContentWrapper from "../../../contentWrapper/ContentWrapper";
+import Img from "../../../lazyLoadImage/Img";
+import { useRef } from "react";
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
+import PosterFallBack from "../../../../assets/no-poster.png"
+import { Link } from "react-router-dom";
+import CircleRating from "../../../circleRating/CircleRating";
+import "../../../carousel/style.scss";
 
-const Carousel = ({data}) => {
+const Similar = ({ data }) => {
   const carouselContainer = useRef();
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
   
@@ -34,20 +33,20 @@ const Carousel = ({data}) => {
   const { mediaType } = useSelector((state) => state.movie);
   
   return (
-  <div className="carousel">
-    <ContentWrapper>
-      <div className="carouselTitle">{data.title}</div>
+    <div className="carousel">
+      <ContentWrapper>
+        <div className="carouselTitle">{data.title}</div>
         <BsFillArrowLeftCircleFill className="carouselLeftNav arrow" onClick={() => navigation("left")} />
         <BsFillArrowRightCircleFill className="carouselRighttNav arrow" onClick={() => navigation("right")} />        
         <div className="carouselItems" ref={carouselContainer}>
-          {data?.map((item) => {
-            const posterUrl = item.poster_path
-              ? URL_IMAGE + item.poster_path
+          {data.items.map((item) => {
+            const posterUrl = item.poster
+              ? URL_IMAGE + item.poster
               : PosterFallBack;
             return (
               <Link key={item.id} className="carouselItem" to={`/${mediaType}/${item.id}`}>
                 <div className="posterBlock">
-                  <Img src={posterUrl} />
+                  <Img src={posterUrl} alt={item.title || item.name} />
                   <CircleRating
                     rating={item.vote_average ? item.vote_average.toFixed(1) : 0}
                   />                                  
@@ -60,11 +59,11 @@ const Carousel = ({data}) => {
               </Link>
             );
           })}
-      </div>        
-    </ContentWrapper>
-  </div>
-);
+        </div>        
+      </ContentWrapper>
+    </div>
+  );
 };
 
 
-export default Carousel
+export default Similar
