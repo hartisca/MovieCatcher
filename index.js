@@ -135,6 +135,7 @@ app.get("/:mediaType/:id", async (req, res) => {
     const data = await response.json();
     const { imdb_id, title, overview, poster_path, backdrop_path, vote_average, tagline, genres } = data;
 
+    //trailer
     let trailer = null;
     if (data.videos && data.videos.results) {
       trailer = data.videos.results.find(
@@ -142,6 +143,38 @@ app.get("/:mediaType/:id", async (req, res) => {
       );
     }
 
+    //director y casting
+    const creditsUrl = `${API_URL}/${mediaType}/${id}/credits?api_key=${API_KEY}`;
+    const creditsResponse = await fetch(creditsUrl);
+    const creditsData = await creditsResponse.json();
+
+    const director = creditsData.crew.find(member => member.job === "Director");
+
+    let directorName = null;
+    let directorProfilePath = null;
+    if (director) {
+      directorName = director.name;
+      directorProfilePath = director.profile_path;
+    }
+
+    const cast = creditsData.cast.slice(0, 8).map(actor => ({
+      name: actor.name,
+      character: actor.character,
+      profile_path: actor.profile_path
+    }));
+
+    //peliculas similares
+    const similarUrl = `${API_URL}/${mediaType}/${id}/similar?api_key=${API_KEY}`;
+    const similarResponse = await fetch(similarUrl);
+    const similarData = await similarResponse.json();
+    const similarMovies = similarData.results.map(movie => ({
+      id: movie.id,
+      title: movie.title,
+      poster: movie.poster_path,
+      release_date: movie.release_date
+    }));
+    
+    //servicios de streaming
     const streamingUrl = `https://streaming-availability.p.rapidapi.com/get?tmdb_id=${mediaType}/${id}`;
     const streamingOptions = {
       method: "GET",
@@ -155,8 +188,8 @@ app.get("/:mediaType/:id", async (req, res) => {
     let streamingInfo = [];
 
     if (streamingData.result && streamingData.result.streamingInfo && streamingData.result.streamingInfo.es) {
-    streamingInfo = streamingData.result.streamingInfo.es;
-}
+      streamingInfo = streamingData.result.streamingInfo.es;
+    }
 
     const movieData = {
       id,
@@ -169,7 +202,11 @@ app.get("/:mediaType/:id", async (req, res) => {
       tagline,
       trailer,
       streamingInfo,
-      genres
+      genres,
+      cast,
+      directorName,
+      directorProfilePath,
+      similarMovies
     };
 
     res.json(movieData);
@@ -178,6 +215,7 @@ app.get("/:mediaType/:id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 
 app.listen(8000, () => console.log(`Server running on port ${PORT}`));

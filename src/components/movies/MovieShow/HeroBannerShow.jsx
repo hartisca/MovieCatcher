@@ -37,7 +37,7 @@ const HeroBannerShow = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
+  
   return (
     <>
       <section className="heroBannerContainer">

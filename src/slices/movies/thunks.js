@@ -1,4 +1,4 @@
-import { setMovies, startLoadingMovies, finishLoadingMovies, setMovie, setStreamingInfo, setVideo, setUpcoming, setPage, setTrending, setTopRated } from "./movieSlice";
+import { setMovies, startLoadingMovies, finishLoadingMovies, setMovie, setStreamingInfo, setVideo, setUpcoming, setPage, setTrending, setTopRated, setCredits, setSimilar } from "./movieSlice";
 
 export const fetchMovies = (searchKey, page, selectedGenre, mediaType) => async (dispatch) => {
   dispatch(startLoadingMovies());
@@ -53,6 +53,8 @@ export const fetchMovieAction = (id, mediaType) => async (dispatch) => {
     dispatch(setMovie(data));
     dispatch(setStreamingInfo(data.streamingInfo));
     dispatch(setVideo(data.trailer))
+    dispatch(setCredits(data.cast))
+    dispatch(setSimilar(data.similarMovies))
     
   } catch (error) {
     console.error(error);

@@ -7,7 +7,7 @@ import HeroBannerShow from "./HeroBannerShow";
 import './style.scss';
 
 export const MovieShow = () => {
-  
+
   const { id } = useParams();
   const { movie, searchKey, mediaType, isLoading } = useSelector((state) => state.movie);
   const dispatch = useDispatch();  
@@ -22,10 +22,11 @@ export const MovieShow = () => {
       navigate('/');
     }
   }, [searchKey, movie.searchKey, navigate]);
-
+  
   
   return (
     <>
+    
     {isLoading?  (
     <div
       style={{ textAlign: "center", margin: "20px" }}
@@ -36,7 +37,7 @@ export const MovieShow = () => {
     </div>
     ):(
     <section>
-      <HeroBannerShow /> 
+      <HeroBannerShow />
               
     </section>
         )}      

@@ -7,6 +7,8 @@ export const movieSlice = createSlice({
    upcoming: [],
    trending: [],
    topRated: [],
+   credits: [],
+   similar: [],
    mediaType: 'movie',
    movie: {
     id: "",
@@ -16,7 +18,8 @@ export const movieSlice = createSlice({
     poster: "",
     backdrop_path:"",
     tagline:"",
-    
+    directorName: "",
+    directorProfilePath: ""    
    }, 
    isLoading: true,
    errors: "",
@@ -70,12 +73,18 @@ export const movieSlice = createSlice({
   },
   setMediaType: (state, action) =>{
     state.mediaType = action.payload;
+  },
+  setCredits: (state, action) => {
+    state.credits = action.payload;
+  },
+  setSimilar: (state, action) => {
+    state.similar = action.payload;
   }
 },
 })
 
 export const { setMovies, startLoadingMovies, finishLoadingMovies, setPage, 
   setSearchKey, setMovie, setStreamingInfo, setVideo, setGenre, setUpcoming, 
-  setTrending, setTopRated, setMediaType } = movieSlice.actions
+  setTrending, setTopRated, setMediaType, setCredits, setSimilar } = movieSlice.actions
 
 export const movieReducer = movieSlice.reducer
