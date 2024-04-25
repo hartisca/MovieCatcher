@@ -51,6 +51,7 @@ export const MovieShow = () => {
     ):(
     <section>
       <HeroBannerShow />
+      <ContentWrapper>
       <section className="castContainer">
         <div>
           <h5 className="heading">Director</h5>
@@ -58,19 +59,18 @@ export const MovieShow = () => {
           <p className="directorName">{movie.directorName}</p>
         </div>
         <div>
-          <h5 className="heading">Top Cast</h5>
-          <ContentWrapper>
-            <div className="castSection">
+          <h5 className="heading">Top Cast</h5>          
+            <section className="castSection">
               {movie.cast.map((actor, index) => (
                 <div key={index}>
                   <Img src={actor.profile_path ? URL_IMAGE + actor.profile_path : avatar} alt={`Profile picture of ${actor.name}`} />
                   <p className="actorName">{actor.name}</p>
                 </div>
               ))}
-            </div>          
-          </ContentWrapper>
+            </section>          
         </div>
       </section>
+      </ContentWrapper>
       <section className="carouselSection">
         <Similar data={carouselData} loading={isLoading} />
       </section>              

@@ -157,7 +157,7 @@ app.get("/:mediaType/:id", async (req, res) => {
       directorProfilePath = director.profile_path;
     }
 
-    const cast = creditsData.cast.slice(0, 7).map(actor => ({
+    const cast = creditsData.cast.slice(0, 5).map(actor => ({
       name: actor.name,
       character: actor.character,
       profile_path: actor.profile_path
