@@ -11,10 +11,10 @@ import { setSearchKey, setPage } from "../../slices/movies/movieSlice";
 const HeroBanner = () => {
   const { upcoming = [], searchKey, page } = useSelector((state) => state.movie);
   const dispatch = useDispatch();
-  const [background, setBackground] = useState("");  
+  const [ background, setBackground ] = useState("");  
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
-  const [localSearchKey, setLocalSearchKey] = useState('');
-  const [searchPerformed, setSearchPerformed] = useState(false);
+  const [ localSearchKey, setLocalSearchKey ] = useState('');
+  const [ searchPerformed, setSearchPerformed ] = useState(false);
 
   useEffect(() => {
     dispatch(fetchMovieUpComing());
@@ -44,7 +44,7 @@ const HeroBanner = () => {
 
   useEffect(() => {
     if (searchPerformed && searchKey !== null) { 
-      dispatch(fetchMovies(searchKey, page));
+      dispatch(fetchMovies(searchKey, page));      
     }
   }, [searchKey, page, dispatch, searchPerformed]); 
 

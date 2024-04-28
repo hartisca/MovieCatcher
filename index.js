@@ -74,27 +74,23 @@ app.get("/home/:mediaType", async (req, res) => {
   }
 });
 
-app.get("/movie", async (req, res) => {
+app.get("/discover", async (req, res) => {
   try {
-    const { page, searchKey, selectedGenre, mediaType } = req.query;
+    const { page, selectedGenre, mediaType } = req.query;
 
     let url;
     let queryParams = {
       api_key: API_KEY,
+      page
     };
 
     if (selectedGenre !== "null" && selectedGenre !== "") {
       queryParams.with_genres = selectedGenre;
-    }
+    }   
 
-    if (searchKey) {
-      url = `${API_URL}/search/movie?query=${searchKey}&api_key=${API_KEY}`;
-    } else {
-      queryParams.page = page;
-      url = `${API_URL}/discover/${mediaType}?${new URLSearchParams(
-        queryParams
-      ).toString()}`;
-    }
+    url = `${API_URL}/discover/${mediaType}?${new URLSearchParams(
+      queryParams
+    ).toString()}`;
 
     console.log("URL final:", url);
 

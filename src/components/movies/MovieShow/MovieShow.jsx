@@ -60,6 +60,7 @@ export const MovieShow = () => {
         </div>
         <div>
           <h5 className="heading">Top Cast</h5>          
+          {movie.cast && movie.cast.length > 0 && (
             <section className="castSection">
               {movie.cast.map((actor, index) => (
                 <div key={index}>
@@ -67,7 +68,8 @@ export const MovieShow = () => {
                   <p className="actorName">{actor.name}</p>
                 </div>
               ))}
-            </section>          
+            </section>
+          )}         
         </div>
       </section>
       </ContentWrapper>

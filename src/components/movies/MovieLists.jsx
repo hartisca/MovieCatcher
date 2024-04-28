@@ -16,13 +16,12 @@ const MovieLists = () => {
   const {
     movies = [],
     isLoading,
-    page,
-    searchKey,
+    page,    
     selectedGenre,
     mediaType
   } = useSelector((state) => state.movie);
   const dispatch = useDispatch();
-
+  
   const handlePreviousPage = usePreviousPageHandler();
   const handleNextPage = useNextPageHandler();
 
@@ -30,9 +29,13 @@ const MovieLists = () => {
     setVisibleMovies((prev) => prev + 8);
   };
 
-  useEffect(() => {    
-    dispatch(fetchMovies(searchKey, page, selectedGenre, mediaType));    
-  }, [searchKey, page, selectedGenre, mediaType, dispatch]);
+  useEffect(() => {
+    if (page === null) {
+      dispatch(fetchMovies(null, selectedGenre, mediaType)); 
+    } else{
+      dispatch(fetchMovies(page, selectedGenre, mediaType));
+    }
+  }, [page, selectedGenre, mediaType, dispatch]);
 
   return (
     <>
@@ -44,13 +47,13 @@ const MovieLists = () => {
         <div className="moviesContainer">
           {isLoading ? (
             <div
-            style={{ textAlign: "center", margin: "20px" }}
-            className="loadingContainer"
-          >
-            <span className="loadingSpan">Loading... </span>
-            <RotateLoader margin="0 auto" color={"#ffff"} size={30} />
-          </div>
-          ) : (
+              style={{ textAlign: "center", margin: "20px" }}
+              className="loadingContainer"
+            >
+              <span className="loadingSpan">Loading... </span>
+              <RotateLoader margin="0 auto" color={"#ffff"} size={30} />
+            </div>
+          ) : page !== null ? (
             <>
               <div className="containerGrid">
                 {movies.slice(0, visibleMovies).map((movie) => (
@@ -79,7 +82,7 @@ const MovieLists = () => {
                 </div>
               </div>
             </>
-          )}
+          ) : null}
         </div>
       </div>
     </>

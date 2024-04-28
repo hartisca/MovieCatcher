@@ -22,6 +22,7 @@ export const useNextPageHandler = () => {
     const nextPage = page + 1;
 
     dispatch(setPage(nextPage));
+    
   };
 
   return handleNextPage;
