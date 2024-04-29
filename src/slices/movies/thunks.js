@@ -1,4 +1,4 @@
-import { setMovies, startLoadingMovies, finishLoadingMovies, setMovie, setStreamingInfo, setVideo, setUpcoming, setPage, setTrending, setTopRated, setSimilar } from "./movieSlice";
+import { setMovies, startLoadingMovies, finishLoadingMovies, setMovie, setStreamingInfo, setVideo, setUpcoming, setPage, setTrending, setTopRated, setSimilar, setSearch } from "./movieSlice";
 
 export const fetchMovies = (page, selectedGenre, mediaType) => async (dispatch) => {
   dispatch(startLoadingMovies());
@@ -25,7 +25,7 @@ export const fetchMovies = (page, selectedGenre, mediaType) => async (dispatch) 
     if (!response.ok) {
       throw new Error(`Error fetching movies: ${response.statusText}`);
     }
-
+    
     const data = await response.json();
     dispatch(setMovies(data));
     
@@ -36,6 +36,43 @@ export const fetchMovies = (page, selectedGenre, mediaType) => async (dispatch) 
     dispatch(finishLoadingMovies());
   }
 };
+
+export const fetchSearch = (query, page) => async (dispatch) => {
+  dispatch(startLoadingMovies()); 
+
+  if (typeof page !== 'number' || isNaN(page)) {
+    dispatch(finishLoadingMovies());
+    return;
+  }
+
+  
+  let queryParams = {
+    query,
+    page: page,
+  };  
+
+  const queryString = new URLSearchParams(queryParams).toString();
+  const url = `http://localhost:8000/search?${queryString}`;
+  console.log(url)
+  
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching movies: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    dispatch(setSearch(data));
+    
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    dispatch(finishLoadingMovies());
+  }
+};
+
 
 export const fetchMovieAction = (id, mediaType) => async (dispatch) => {
   dispatch(startLoadingMovies());  

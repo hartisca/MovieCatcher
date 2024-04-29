@@ -5,16 +5,16 @@ import './HeroBanner.scss'
 import Img from "../../components/lazyLoadImage/Img";
 import ContentWrapper from "../../components/contentWrapper/ContentWrapper";
 import { IoSearchSharp } from "react-icons/io5";
-import { fetchMovies } from "../../slices/movies/thunks";
-import { setSearchKey, setPage } from "../../slices/movies/movieSlice";
+import { fetchSearch } from "../../slices/movies/thunks";
+import { useNavigate } from "react-router-dom";
 
 const HeroBanner = () => {
-  const { upcoming = [], searchKey, page } = useSelector((state) => state.movie);
+  const { upcoming = [], page } = useSelector((state) => state.movie);
   const dispatch = useDispatch();
   const [ background, setBackground ] = useState("");  
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
-  const [ localSearchKey, setLocalSearchKey ] = useState('');
-  const [ searchPerformed, setSearchPerformed ] = useState(false);
+  const [ query, setQuery ] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchMovieUpComing());
@@ -26,27 +26,13 @@ const HeroBanner = () => {
       const bg = URL_IMAGE + upcoming[randomIndex].backdrop_path;
       setBackground(bg);
     }
-  }, [upcoming]);
-
-  const handleSearchChange = (e) => {
-    setLocalSearchKey(e.target.value);
-  };
+  }, [upcoming]);  
   
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    dispatch(setSearchKey(localSearchKey));
-    setSearchPerformed(true); 
-    if (searchKey === "") {
-      const randomPage = Math.floor(Math.random() * 500) + 1;
-      dispatch(setPage(randomPage));
-    }
+    dispatch(fetchSearch(query, page))
+    navigate(`/search/${query}`)
   }; 
-
-  useEffect(() => {
-    if (searchPerformed && searchKey !== null) { 
-      dispatch(fetchMovies(searchKey, page));      
-    }
-  }, [searchKey, page, dispatch, searchPerformed]); 
 
   return (
     <section className="heroBanner">
@@ -67,8 +53,8 @@ const HeroBanner = () => {
                 <input
                   type="text"
                   placeholder="Search for any movie or Tv show..."
-                  value={localSearchKey}
-                  onChange={handleSearchChange}
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                 />
                 <button type="submit" className="botonBanner">
                   <IoSearchSharp className="iconoLupa" /> Search

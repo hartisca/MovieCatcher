@@ -92,7 +92,7 @@ app.get("/discover", async (req, res) => {
       queryParams
     ).toString()}`;
 
-    console.log("URL final:", url);
+    
 
     const response = await fetch(url);
 
@@ -108,6 +108,45 @@ app.get("/discover", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+app.get("/search", async (req, res) => {
+  try {
+    const { query, page } = req.query;
+
+    // Verificar si el parámetro query está presente
+    if (!query) {
+      return res.status(400).json({ error: "Missing query parameter" });
+    }
+
+    let url;
+    let queryParams = {
+      api_key: API_KEY,
+      query: query,
+      page: page
+    }; 
+
+    url = `${API_URL}/search/multi?${new URLSearchParams(
+      queryParams
+    ).toString()}`;
+
+    console.log("URL final:", url);
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching movies: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const results = data.results;
+    res.json(results);
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 app.get("/:mediaType/:id", async (req, res) => {
   try {
@@ -144,33 +183,42 @@ app.get("/:mediaType/:id", async (req, res) => {
     const creditsResponse = await fetch(creditsUrl);
     const creditsData = await creditsResponse.json();
 
-    const director = creditsData.crew.find(member => member.job === "Director");
-
     let directorName = null;
     let directorProfilePath = null;
-    if (director) {
-      directorName = director.name;
-      directorProfilePath = director.profile_path;
+    if (creditsData.crew && creditsData.crew.length > 0) {
+      const director = creditsData.crew.find(member => member.job === "Director");
+      if (director) {
+        directorName = director.name;
+        directorProfilePath = director.profile_path;
+      }
     }
 
-    const cast = creditsData.cast.slice(0, 5).map(actor => ({
-      name: actor.name,
-      character: actor.character,
-      profile_path: actor.profile_path
-    }));
+    let cast = [];
+
+    if (creditsData.cast && creditsData.cast.length > 0) {
+      cast = creditsData.cast.slice(0, 5).map(actor => ({
+        name: actor.name,
+        character: actor.character,
+        profile_path: actor.profile_path
+      }));
+    }
 
     //peliculas similares
     const similarUrl = `${API_URL}/${mediaType}/${id}/similar?api_key=${API_KEY}`;
     const similarResponse = await fetch(similarUrl);
     const similarData = await similarResponse.json();
-    const similarMovies = similarData.results.map(movie => ({
-      id: movie.id,
-      title: movie.title,
-      poster: movie.poster_path,
-      release_date: movie.release_date,
-      backdrop_path: movie.backdrop_path,
-      vote_average: movie.vote_average
-    }));
+    let similarMovies = [];
+
+    if (similarData.results && similarData.results.length > 0) {
+      similarMovies = similarData.results.map(movie => ({
+        id: movie.id,
+        title: movie.title,
+        poster: movie.poster_path,
+        release_date: movie.release_date,
+        backdrop_path: movie.backdrop_path,
+        vote_average: movie.vote_average
+      }));
+    }
     
     //servicios de streaming
     const streamingUrl = `https://streaming-availability.p.rapidapi.com/get?tmdb_id=${mediaType}/${id}`;

@@ -18,7 +18,7 @@ const MovieLists = () => {
     isLoading,
     page,    
     selectedGenre,
-    mediaType
+    mediaType,
   } = useSelector((state) => state.movie);
   const dispatch = useDispatch();
   

@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setSearchKey } from "../../slices/movies/movieSlice";
+import { useSelector } from "react-redux";
 import './style.scss';
 
 export const MovieList = ({ movie }) => {
@@ -12,17 +11,13 @@ export const MovieList = ({ movie }) => {
     objectFit: 'cover',
     objectPosition: 'center',
   };
-  const { mediaType } = useSelector((state) => state.movie)
-  const dispatch = useDispatch();  
-  const handleMovieClick = () => {
-    dispatch(setSearchKey(""));    
-  };
+  const { mediaType } = useSelector((state) => state.movie)  
   
   return (
     <Link
       to={`/${mediaType}/${movie.id}`}
       className="movieCardContainer"
-      onClick={handleMovieClick}
+      
     >
       <article className="movieCard" style={{ ...backgoundImageStyle }}>
         <div className="movieRatings">

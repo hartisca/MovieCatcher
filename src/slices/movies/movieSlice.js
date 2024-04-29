@@ -8,6 +8,7 @@ export const movieSlice = createSlice({
    trending: [],
    topRated: [],
    similar: [],
+   search: [],
    mediaType: 'movie',
    movie: {
     id: "",
@@ -23,7 +24,6 @@ export const movieSlice = createSlice({
    isLoading: true,
    errors: "",
    page: null,
-   searchKey: "",
    streamingInfo: [],
    video: "",
    genre: {
@@ -46,8 +46,8 @@ export const movieSlice = createSlice({
  setPage: (state, action) => {
   state.page = action.payload;
  },
-  setSearchKey: (state, action) => {
-    state.searchKey = action.payload
+  setSearch: (state, action) => {
+    state.search = action.payload
   },
   setMovie: (state, action) => {
     state.movie = action.payload;
@@ -80,7 +80,7 @@ export const movieSlice = createSlice({
 })
 
 export const { setMovies, startLoadingMovies, finishLoadingMovies, setPage, 
-  setSearchKey, setMovie, setStreamingInfo, setVideo, setGenre, setUpcoming, 
+  setSearch, setMovie, setStreamingInfo, setVideo, setGenre, setUpcoming, 
   setTrending, setTopRated, setMediaType, setSimilar } = movieSlice.actions
 
 export const movieReducer = movieSlice.reducer
