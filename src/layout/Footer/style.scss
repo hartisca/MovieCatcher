@@ -1,0 +1,43 @@
+@import '../../mixins.scss';
+.footerContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 10px;
+  position: absolute;
+  bottom: 0; 
+  width: 100%;
+  
+  .footerBar {
+    width: 50%;
+    border: none;
+    border-top: solid 1px var(--borders);
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .footerInfoContainer {
+    display: flex;
+    gap: 60px;
+    
+    .footerInfo {
+      font-size: 20px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .footerText {
+      font-size: 14px;
+      color: var(--input);
+    }
+    .linkedIn {
+      font-size: 30px;      
+    }
+  }
+  
+  
+}
+
+
+
+

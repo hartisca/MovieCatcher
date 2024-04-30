@@ -3,10 +3,10 @@ import Rutas from './Rutas'
 import Footer from './layout/Footer/Footer'
 import Header from './layout/HeroBanner/Header'
 
-function App() {
-  
+function App() { 
+
   return (
-    <div style={{scrollBehavior: 'smooth'}}>
+    <div className='appContainer' style={{scrollBehavior: 'smooth'}}>
       <Header />      
       <Rutas />
       <Footer />
