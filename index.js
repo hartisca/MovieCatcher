@@ -113,7 +113,6 @@ app.get("/search", async (req, res) => {
   try {
     const { query, page } = req.query;
 
-    // Verificar si el parámetro query está presente
     if (!query) {
       return res.status(400).json({ error: "Missing query parameter" });
     }
@@ -129,10 +128,8 @@ app.get("/search", async (req, res) => {
       queryParams
     ).toString()}`;
 
-    console.log("URL final:", url);
-
     const response = await fetch(url);
-
+    
     if (!response.ok) {
       throw new Error(`Error fetching movies: ${response.statusText}`);
     }

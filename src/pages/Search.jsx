@@ -37,7 +37,7 @@ const Search = () => {
               <span className="loadingSpan">Loading... </span>
               <RotateLoader margin="0 auto" color={"#ffff"} size={30} />
             </div>
-          ) : page !== null ? (
+          ) : search.length > 0 ? (
             <>
               <div className="containerGrid">
                 {search.slice(0, visibleMovies).map((movie) => (
@@ -66,7 +66,13 @@ const Search = () => {
                 </div>
               </div>
             </>
-          ) : null}
+          ) : 
+          <>
+            <div className="noResultsContainer">
+              <p className="noResults"> No results found. </p>
+            </div>            
+          </>
+          }
         </div>      
     </>
   )

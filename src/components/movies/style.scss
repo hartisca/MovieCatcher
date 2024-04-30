@@ -130,8 +130,18 @@
   position: absolute;
   top: 50%;
   left: 45%;
+  .loadingSpan{
+    color: white;
+    font-size: 24px;
+  }
 }
-.loadingSpan{
-  color: white;
-  font-size: 24px;
+
+.noResultsContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .noResults{
+    font-size: 24px;
+  }
 }
+

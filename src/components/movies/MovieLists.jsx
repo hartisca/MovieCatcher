@@ -82,7 +82,11 @@ const MovieLists = () => {
                 </div>
               </div>
             </>
-          ) : null}
+          ) : <>
+          <div className="noResultsContainer">
+            <p className="noResults"> Something went wrong </p>
+          </div>            
+        </>}
         </div>
       </div>
     </>
