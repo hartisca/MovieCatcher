@@ -7,7 +7,7 @@
   padding-bottom: 10px;
   position: absolute;
   bottom: 0; 
-  width: 100%;
+  width: 100%;  
   
   .footerBar {
     width: 50%;
@@ -18,20 +18,35 @@
   }
   .footerInfoContainer {
     display: flex;
-    gap: 60px;
-    
-    .footerInfo {
-      font-size: 20px;
-      display: flex;
-      gap: 5px;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    @include md{
+      flex-direction: row;
+      gap: 60px;
+    }
+    .footerInfo {      
+      display: flex;      
+      justify-content: center;
+      margin-left: 5px;
+      @include md{
+        gap: 5px;
+      }
     }
     .footerText {
-      font-size: 14px;
+      font-size: 10px;
       color: var(--input);
+      @include md{
+        font-size: 13px;
+      }
     }
     .linkedIn {
-      font-size: 30px;      
+      font-size: 30px;
+      margin-top: 5px;
+      @include md{
+        margin: 0;
+      }
     }
   }
   

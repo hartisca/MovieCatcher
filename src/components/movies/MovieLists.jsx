@@ -67,6 +67,7 @@ const MovieLists = () => {
                   <button
                     onClick={handlePreviousPage}
                     disabled={page === 1}
+                    className="previousPageButton"
                   >{`<< Previous`}</button>
                 </div>
                 <div className="loadMoreButton">

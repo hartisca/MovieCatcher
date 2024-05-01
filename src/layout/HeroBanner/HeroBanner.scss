@@ -1,7 +1,7 @@
 @import "../../mixins.scss";
 
 .heroBanner {
-  width: 100%;
+  width: 100vw;
   height: 450px;
   background-color: var(--black2);
   display: flex;
@@ -51,7 +51,7 @@
     max-width: 800px;
     margin: 0 auto;
     .titleBanner{
-      font-size: 50px;
+      font-size: 48px;
       font-weight: 700;
       margin-bottom: 10px;
       @include md{
@@ -64,7 +64,7 @@
       }
     }    
     .subtitleBanner{
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 500;
       margin-bottom: 40px;
       @include md{
@@ -135,7 +135,7 @@
     -webkit-backdrop-filter: blur(3.5px);
   }
   &.show {
-    background-color: var(--black3);
+    background-color: rgba(0, 0, 0, 0.25);
   }
   &.hide {
     transform: translateY(-60px);
@@ -181,26 +181,26 @@
   }
 
   .mobileMenuItems {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      @include md {
-          display: none;
-      }
-      svg {
-          font-size: 18px;
-          color: white;
-      }
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    @include md {
+      display: none;
+    }
+    svg {
+      font-size: 18px;
+      color: white;
+    }
   }
 
   &.mobileView {
-    background: var(--black3);
+    background: rgba(0, 0, 0, 0.25);
     .menuItems {
       display: flex;
       position: absolute;
       top: 60px;
       left: 0;
-      background: var(--black3);
+      background: rgba(0, 0, 0, 0.25);
       flex-direction: column;
       width: 100%;
       padding: 20px 0;

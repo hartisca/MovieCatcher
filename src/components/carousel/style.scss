@@ -1,4 +1,5 @@
 @import "../../mixins.scss";
+
 .carouselSection {
   margin-bottom: 100px;
   display: flex;
@@ -18,6 +19,10 @@
   }
   .discoverMoreButton{
     margin-top: 50px;
+    margin-bottom: 40px;
+    @include md{
+      margin-bottom: 10px;
+    }
   }
   .arrow {
     font-size: 30px;

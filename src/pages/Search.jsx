@@ -46,11 +46,12 @@ const Search = () => {
                   </div>
                 ))}
               </div>
-              <div className="paginationContainer">
+              <div className="paginationContainer2">
                 <div>
                 <button
                   onClick={() => setPage(page - 1)}
                   disabled={page === 1}
+                  className="previousPageButton"
                 >{`<< Previous`}</button>
                 </div>
                 <div className="loadMoreButton">

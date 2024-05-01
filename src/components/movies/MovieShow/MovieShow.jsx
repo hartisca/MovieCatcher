@@ -15,9 +15,8 @@ import './style.scss';
 export const MovieShow = () => {
 
   const { id } = useParams();
-  const { movie, searchKey, mediaType, isLoading, similar } = useSelector((state) => state.movie);
+  const { movie, mediaType, isLoading, similar } = useSelector((state) => state.movie);
   const dispatch = useDispatch();  
-  const navigate = useNavigate();
   const URL_IMAGE = 'https://image.tmdb.org/t/p/original';
 
   const title = mediaType === "tv" ? "Similar TV Shows" : "Similar Movies";
@@ -30,16 +29,8 @@ export const MovieShow = () => {
     dispatch(fetchMovieAction(id, mediaType));    
   }, [id]);
 
-  useEffect(() => {    
-    if (searchKey && searchKey !== movie.searchKey) { 
-      navigate('/');
-    }
-  }, [searchKey, movie.searchKey, navigate]);
-  
-  
   return (
-    <>
-    
+    <>    
     {isLoading?  (
     <div
       style={{ textAlign: "center", margin: "20px" }}

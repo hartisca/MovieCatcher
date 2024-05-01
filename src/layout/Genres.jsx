@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { setGenre } from "../slices/movies/movieSlice";
 import { useState } from "react";
 import { GenreList } from "../assets/GenreList";
+
 const Genres = () =>{
   const [selected, setSelected] = useState(null);  
   const dispatch = useDispatch();  
@@ -9,9 +10,7 @@ const Genres = () =>{
   const handleGenreSelect = (genre) => {
     dispatch(setGenre(genre));
     setSelected(genre);
-  } 
-
-  
+  }   
 
   return(
     <>    

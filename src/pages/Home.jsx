@@ -1,10 +1,12 @@
 import Trending from "../components/movies/Trending"
 import HeroBanner from "../layout/HeroBanner/HeroBanner"
+import './style.scss'
 
-const Home = () => { 
+const Home = () => {
+
   return (
     <>      
-      <div>
+      <div className="homeContainer">
         <HeroBanner />
         <Trending />
       </div>

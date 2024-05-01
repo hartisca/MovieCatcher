@@ -32,10 +32,12 @@ const HeroBannerShow = () => {
 
   const handleOpenModal = () => {
     setShowModal(true);
+    document.body.classList.add('modal-open');
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
+    document.body.classList.remove('modal-open');
   };
   
   return (
