@@ -10,7 +10,9 @@ import {
 import Genres from "../../layout/Genres";
 import './style.scss';
 import HeroBanner from "../../layout/HeroBanner/HeroBanner";
-
+import Select from 'react-select';
+import { GenreList } from "../../assets/GenreList";
+import { setGenre } from "../../slices/movies/movieSlice";
 const MovieLists = () => {
   const [visibleMovies, setVisibleMovies] = useState(8);
   const {
@@ -29,6 +31,15 @@ const MovieLists = () => {
     setVisibleMovies((prev) => prev + 8);
   };
 
+  const handleGenreChange = (selectedGenre) => {
+    if (selectedGenre) {
+      const genreId = selectedGenre.id;
+      dispatch(setGenre(genreId));
+    } else {
+      dispatch(setGenre(null));
+    }
+  };
+
   useEffect(() => {
     if (page === null) {
       dispatch(fetchMovies(null, selectedGenre, mediaType)); 
@@ -43,6 +54,19 @@ const MovieLists = () => {
       <div className="containerMovieList">
         <div className="stickyNav">
           <Genres />
+          <Select
+            name="genres"                   
+            value={selectedGenre}
+            closeMenuOnSelect={true}
+            options={GenreList}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id}
+            onChange={handleGenreChange} 
+            placeholder="Select genres"
+            className="react-select-container genresDD"
+            classNamePrefix="react-select"
+            
+          />
         </div>
         <div className="moviesContainer">
           {isLoading ? (

@@ -92,10 +92,8 @@ app.get("/discover", async (req, res) => {
       queryParams
     ).toString()}`;
 
-    
-
     const response = await fetch(url);
-
+    
     if (!response.ok) {
       throw new Error(`Error fetching movies: ${response.statusText}`);
     }
