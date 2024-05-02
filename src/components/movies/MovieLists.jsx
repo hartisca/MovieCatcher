@@ -13,6 +13,7 @@ import HeroBanner from "../../layout/HeroBanner/HeroBanner";
 import Select from 'react-select';
 import { GenreList } from "../../assets/GenreList";
 import { setGenre } from "../../slices/movies/movieSlice";
+
 const MovieLists = () => {
   const [visibleMovies, setVisibleMovies] = useState(8);
   const {

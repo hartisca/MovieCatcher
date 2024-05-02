@@ -6,3 +6,14 @@
     max-width: 100%;
   }
 }
+
+.loadingContainer2{
+  position: absolute;
+  top: 65%;
+  left: 30%;
+  @include md{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+  }
+}
