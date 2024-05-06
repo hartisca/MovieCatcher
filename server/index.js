@@ -5,7 +5,13 @@ import cors from "cors";
 const app = express();
 process.loadEnvFile();
 
-app.use(cors());
+const corsConfig = {
+  origin: "*",
+  credential: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}
+
+app.use(cors(corsConfig));
 
 const API_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
