@@ -17,7 +17,7 @@ export const fetchMovies = (page, selectedGenre, mediaType) => async (dispatch) 
   };  
 
   const queryString = new URLSearchParams(queryParams).toString();
-  const url = `https://movie-catcher-server.vercel.app/discover?${queryString}`;
+  const url = `https://moviecatcher.onrender.com/discover?${queryString}`;
   
   try {
     const response = await fetch(url);
@@ -52,7 +52,7 @@ export const fetchSearch = (query, page) => async (dispatch) => {
   };  
 
   const queryString = new URLSearchParams(queryParams).toString();
-  const url = `https://movie-catcher-server.vercel.app/search?${queryString}`;
+  const url = `https://moviecatcher.onrender.com/search?${queryString}`;
     
   try {
     const response = await fetch(url);
@@ -76,7 +76,7 @@ export const fetchSearch = (query, page) => async (dispatch) => {
 export const fetchMovieAction = (id, mediaType) => async (dispatch) => {
   dispatch(startLoadingMovies());  
   
-  const url = `https://movie-catcher-server.vercel.app/${mediaType}/${id}`;
+  const url = `https://moviecatcher.onrender.com/${mediaType}/${id}`;
   
   try {
     const response = await fetch(url);
@@ -103,7 +103,7 @@ export const fetchMovieAction = (id, mediaType) => async (dispatch) => {
 export const fetchMovieUpComing = () => async(dispatch) => {
   dispatch(startLoadingMovies());
 
-  const url = `https://movie-catcher-server.vercel.app/movies/upcoming`
+  const url = `https://moviecatcher.onrender.com/movies/upcoming`
 
   try {
     const response = await fetch(url);
@@ -126,7 +126,7 @@ export const fetchMovieUpComing = () => async(dispatch) => {
 export const fetchHomeData = (mediaType) => async (dispatch) => {
   dispatch(startLoadingMovies());
 
-  const homeUrl = `https://movie-catcher-server.vercel.app/home/${mediaType}`;
+  const homeUrl = `https://moviecatcher.onrender.com/home/${mediaType}`;
 
   try {
     const homeResponse = await fetch(homeUrl);
