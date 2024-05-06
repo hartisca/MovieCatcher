@@ -20,7 +20,7 @@ const Search = () => {
   const handleLoadMore = () => {
     setVisibleMovies((prev) => prev + 8);
   };
-
+  
   useEffect(() => {
     setLoading(true); 
     dispatch(fetchSearch(query, page))
@@ -50,7 +50,7 @@ const Search = () => {
             <div className="containerGrid">
               {search.slice(0, visibleMovies).map((movie) => (
                 <div key={movie.id} className="generalGridSettings">
-                  <MovieList movie={movie} />
+                  <MovieList movie={movie} mediaTypeProp={movie.media_type || 'movie' }/>
                 </div>
               ))}
             </div>

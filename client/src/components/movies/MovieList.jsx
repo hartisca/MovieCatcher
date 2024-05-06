@@ -3,18 +3,21 @@
 import { Link } from "react-router-dom";
 import './style.scss';
 import posterFallback from '../../assets/no-poster.png'
+import { useSelector } from "react-redux";
 
-export const MovieList = ({ movie }) => {
+export const MovieList = ({ movie, mediaType: mediaTypeProp }) => {
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
   const backgoundImageStyle = {
     backgroundImage: `url(${movie.poster_path ? URL_IMAGE + movie.poster_path : posterFallback})`,
     objectFit: 'cover',
     objectPosition: 'center',
   };
-    
+  const reduxMediaType = useSelector((state) => state.movie.mediaType);
+
+  const mediaType = mediaTypeProp || movie.media_type || reduxMediaType || 'movie';
   return (
     <Link
-      to={`/${movie.media_type}/${movie.id}`}
+      to={`/${mediaType}/${movie.id}`}
       className="movieCardContainer"
       
     >

@@ -44,7 +44,6 @@ export const fetchSearch = (query, page) => async (dispatch) => {
     dispatch(finishLoadingMovies());
     return;
   }
-
   
   let queryParams = {
     query,

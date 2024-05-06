@@ -18,17 +18,18 @@ export const MovieShow = () => {
   const { movie, isLoading, similar } = useSelector((state) => state.movie);
   const dispatch = useDispatch();  
   const URL_IMAGE = 'https://image.tmdb.org/t/p/original';
-
+  
   const title = mediaType === "tv" ? "Similar TV Shows" : "Similar Movies";
   const carouselData = {
     title: title,
     items: similar
   };
   
+  
   useEffect(() => {
     dispatch(fetchMovieAction(id, mediaType));    
   }, [id]);
-
+  
   return (
     <>    
     {isLoading?  (
