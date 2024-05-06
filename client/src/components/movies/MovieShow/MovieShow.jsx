@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { fetchMovieAction } from "../../../slices/movies/thunks";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import RotateLoader from "react-spinners/ClipLoader";
 import HeroBannerShow from "./HeroBannerShow";
 import avatar from "../../../assets/avatar.png";
@@ -14,8 +14,8 @@ import './style.scss';
 
 export const MovieShow = () => {
 
-  const { id } = useParams();
-  const { movie, mediaType, isLoading, similar } = useSelector((state) => state.movie);
+  const { mediaType, id } = useParams();
+  const { movie, isLoading, similar } = useSelector((state) => state.movie);
   const dispatch = useDispatch();  
   const URL_IMAGE = 'https://image.tmdb.org/t/p/original';
 

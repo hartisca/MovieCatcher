@@ -1,18 +1,17 @@
 /* eslint-disable react/prop-types */
 
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import './style.scss';
+import posterFallback from '../../assets/no-poster.png'
 
 export const MovieList = ({ movie }) => {
   const URL_IMAGE = "https://image.tmdb.org/t/p/original";
   const backgoundImageStyle = {
-    backgroundImage: `url(${URL_IMAGE + movie.poster_path})`,
+    backgroundImage: `url(${movie.poster_path ? URL_IMAGE + movie.poster_path : posterFallback})`,
     objectFit: 'cover',
     objectPosition: 'center',
   };
-  const { mediaType } = useSelector((state) => state.movie)  
-  
+    
   return (
     <Link
       to={`/${movie.media_type}/${movie.id}`}

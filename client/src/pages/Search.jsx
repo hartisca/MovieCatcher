@@ -27,7 +27,7 @@ const Search = () => {
       .then(() => setLoading(false)) 
       .catch(() => setLoading(false)); 
   }, [query, page, dispatch]);
-  console.log(search)
+  
   return (
     <>
       <HeroBanner />

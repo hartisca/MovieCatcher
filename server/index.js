@@ -157,7 +157,7 @@ app.get("/:mediaType/:id", async (req, res) => {
     ).toString()}`;
 
     const response = await fetch(url);
-    console.log(url)
+    
     if (!response.ok) {
       throw new Error(`Error fetching movie: ${response.statusText}`);
     }
