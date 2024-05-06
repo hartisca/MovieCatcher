@@ -10,6 +10,8 @@ app.use(cors());
 const API_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
 app.get("/movies/upcoming", async (req, res) => {
   try {
     let queryParams = {
