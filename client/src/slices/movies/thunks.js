@@ -17,7 +17,7 @@ export const fetchMovies = (page, selectedGenre, mediaType) => async (dispatch) 
   };  
 
   const queryString = new URLSearchParams(queryParams).toString();
-  const url = `http://localhost:8000/discover?${queryString}`;
+  const url = `https://movie-catcher-server.vercel.app/discover?${queryString}`;
   
   try {
     const response = await fetch(url);
@@ -52,7 +52,7 @@ export const fetchSearch = (query, page) => async (dispatch) => {
   };  
 
   const queryString = new URLSearchParams(queryParams).toString();
-  const url = `http://localhost:8000/search?${queryString}`;
+  const url = `https://movie-catcher-server.vercel.app/search?${queryString}`;
     
   try {
     const response = await fetch(url);
@@ -76,7 +76,7 @@ export const fetchSearch = (query, page) => async (dispatch) => {
 export const fetchMovieAction = (id, mediaType) => async (dispatch) => {
   dispatch(startLoadingMovies());  
   
-  const url = `http://localhost:8000/${mediaType}/${id}`;
+  const url = `https://movie-catcher-server.vercel.app/${mediaType}/${id}`;
   
   try {
     const response = await fetch(url);
@@ -103,7 +103,7 @@ export const fetchMovieAction = (id, mediaType) => async (dispatch) => {
 export const fetchMovieUpComing = () => async(dispatch) => {
   dispatch(startLoadingMovies());
 
-  const url = `http://localhost:8000/movies/upcoming`
+  const url = `https://movie-catcher-server.vercel.app/movies/upcoming`
 
   try {
     const response = await fetch(url);
@@ -126,7 +126,7 @@ export const fetchMovieUpComing = () => async(dispatch) => {
 export const fetchHomeData = (mediaType) => async (dispatch) => {
   dispatch(startLoadingMovies());
 
-  const homeUrl = `http://localhost:8000/home/${mediaType}`;
+  const homeUrl = `https://movie-catcher-server.vercel.app/home/${mediaType}`;
 
   try {
     const homeResponse = await fetch(homeUrl);
