@@ -44,6 +44,16 @@
     .linkedIn {
       font-size: 30px;
       margin-top: 5px;
+      color: rgb(0, 119, 181);
+      @include md{
+        margin: 0;
+      }
+    }
+    .github {
+      font-size: 30px;
+      margin-top: 5px;
+      color: #fff;      
+      border-color: none;
       @include md{
         margin: 0;
       }
