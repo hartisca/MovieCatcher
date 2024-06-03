@@ -4,7 +4,7 @@ import cors from "cors";
 
 const app = express();
 
-app.use();
+app.use(cors());
 
 const API_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
